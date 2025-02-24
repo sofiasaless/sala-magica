@@ -1,0 +1,13 @@
+.titulo-body {
+    padding-top: 1rem;
+}
+
+h3 {
+    color: var(--cinzaUm);
+}
+
+.break {
+    height: 3px;
+    background-color: var(--cinzaUm);
+    width: 15%;
+}
