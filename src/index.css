@@ -21,16 +21,15 @@
 }
 
 .fonte-titulos {
-  font-family: "Fredoka", serif;
+  font-family: Fredoka, serif;
   font-weight: 600;
 }
 
 .fonte-outros {
-  font-family: "Fredoka", serif;
+  font-family: Fredoka, serif;
   font-weight: 400;
 }
 
 body {
-  font-family: "Fredoka", serif;
-  font-weight: 400;
+  /* font-family: "Fredoka", serif; */
 }

@@ -1,0 +1,28 @@
+nav {
+  background-color: var(--verdeUm);
+  height: 6rem;
+}
+
+.logo {
+  height: 5.6rem;
+}
+
+img {
+  height: 1.5rem;
+}
+
+.div-nav {
+  width: 60%;
+  /* background-color: burlywood; */
+}
+
+#link {
+  color: var(--verdeDois);
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#link:hover {
+  border-bottom: 2px solid var(--verdeDois);
+}
