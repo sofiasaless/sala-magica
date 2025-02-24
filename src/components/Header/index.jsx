@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       <nav className='navbar navbar-expand-lg align-items-center justify-content-center'>
-        <div className='div-nav d-flex justify-content-between'>
+        <div className='container d-flex justify-content-between'>
           <div>
             <img className='logo' src={logo} />
           </div>

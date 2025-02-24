@@ -1,0 +1,28 @@
+.card {
+  width: 14rem;
+  background-color: var(--cinzaUm);
+}
+
+#card-photo {
+  height: auto;
+  border: 3px solid var(--cinzaUm);
+}
+
+.card-textos {
+  flex: 1;
+}
+
+.card-title {
+  color: var(--brancoFundo);
+  font-family: Fredoka, serif;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.card-text {
+  color: var(--vermelhoUm);
+  font-family: Fredoka, serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+}

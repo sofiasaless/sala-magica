@@ -17,7 +17,6 @@
   --vermelhoDois: #a24444;
 
   background-color: var(--brancoFundo);
-  
 }
 
 .fonte-titulos {
@@ -30,6 +29,7 @@
   font-weight: 400;
 }
 
-body {
+body, main, section, html {
+  background-color: var(--brancoFundo);
   /* font-family: "Fredoka", serif; */
 }
