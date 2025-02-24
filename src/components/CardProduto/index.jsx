@@ -2,6 +2,8 @@ import './style.css'
 
 // importação de imagem
 import template from '../../assets/cards/calendario.png'
+import favoritar from '../../assets/material/heart_pink_contorno.png'
+import desfavoritar from '../../assets/material/heart_pink_preenchido.png'
 
 export default function CardProduto() {
 
@@ -15,7 +17,7 @@ export default function CardProduto() {
               <p className="card-text">R$50,00</p>
             </div>
             <div className='d-flex justify-content-end align-items-end'>
-              <h6>S2</h6>
+              <img src={favoritar} alt="" />
             </div>
           </div>
       </div>
