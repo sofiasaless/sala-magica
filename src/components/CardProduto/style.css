@@ -1,6 +1,12 @@
 .card {
   width: 14rem;
   background-color: var(--cinzaUm);
+  transition: all 0.5s ease;
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 #card-photo {

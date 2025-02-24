@@ -17,7 +17,7 @@ export default function CardProduto() {
               <p className="card-text">R$50,00</p>
             </div>
             <div className='d-flex justify-content-end align-items-end'>
-              <img src={favoritar} alt="" />
+              <img style={{cursor: 'pointer'}} src={favoritar} alt="" />
             </div>
           </div>
       </div>
