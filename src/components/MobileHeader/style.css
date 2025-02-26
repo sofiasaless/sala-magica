@@ -1,0 +1,24 @@
+.navmobile {
+  display: none;
+}
+
+@media screen and (max-width: 995px) {
+  .navmobile {
+    display: flex;
+    background-color: var(--verdeUm);
+    height: 5.4rem;
+  }
+    
+  .icones {
+    height: 1.5rem;
+  }
+
+  .icones:hover {
+    cursor: pointer;
+  }
+
+  #area-links {
+    width: 100%;
+  }
+  
+}
