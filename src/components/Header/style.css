@@ -10,15 +10,15 @@
 
 nav {
   background-color: var(--verdeUm);
-  height: 6.3rem;
+  height: 5rem;
 }
 
 .logo {
-  height: 5.6rem;
+  height: 4.5rem;
 }
 
 img {
-  height: 1.5rem;
+  height: 1.3rem;
 }
 
 .div-nav {
@@ -28,7 +28,7 @@ img {
 
 #link {
   color: var(--verdeDois);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
 }
