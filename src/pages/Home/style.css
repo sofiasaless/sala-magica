@@ -2,5 +2,12 @@ section {
   /* background-color: chocolate; */
   display: flex;
   flex-wrap: wrap;
-  
+}
+
+.bt-verTodos {
+    background-color: var(--cinzaUm);
+    color: var(--brancoFundo);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
 }

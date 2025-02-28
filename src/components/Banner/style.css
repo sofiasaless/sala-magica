@@ -1,0 +1,45 @@
+@media screen and (max-width: 765px) {
+  .txt-banner {
+    width: 80% !important;
+    text-align: center;
+  }
+
+  .container-banner-interno {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .barra-banner {
+    display: none;
+  }
+
+}
+
+.container-banner {
+  width: 100%;
+  background-color: var(--verdeDois);
+}
+
+.barra-banner {
+  width: 0.2rem;
+  height: 13rem;
+
+  /* background-color: var(--brancoFundo); */
+  background-color: var(--brancoFundo);
+}
+
+.imgban {
+  height: 10rem;
+  border: 3px solid var(--brancoFundo);
+}
+
+.img-banner {
+  height: 13rem;
+}
+
+.txt-banner {
+  width: 40%;
+  color: var(--brancoFundo);
+  font-size: larger;
+  font-weight: 500;
+}
