@@ -10,13 +10,13 @@ import Banner from '../../components/Banner/Banner';
 // assets
 import img1 from '../../assets/banner/creative-thinking-animate.svg'
 import img2 from '../../assets/banner/kindergarten-student-animate.svg'
+import Container from '../../components/Container/Container';
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: '#e8e8e8' }}>
+    <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
-      <main className='container'>
-
+      <Container>
         <Titulo titulo={"Enfeites de parede"} upper={true} />
 
         <section className='container py-5 gap-4 justify-content-center'>
@@ -34,18 +34,17 @@ export default function Home() {
         <section className='container d-flex justify-content-center'>
           <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4'>Ver todos os produtos</div>
         </section>
+      </Container>
 
-      </main>
 
-      <main>
+      <div>
         <Banner
           imgImport={img2} 
           conteudoTXT={"Personalizamos cada peça com carinho, utilizando EVA, papel crepom, TNT e muito mais para criar um ambiente lúdico e inspirador para suas crianças."}
         />
-      </main>
+      </div>
 
-      <main className='container'>
-
+      <Container>
         <Titulo titulo={"Materiais educativos"} upper={true} />
 
         <section className='container py-5 gap-4 justify-content-center'>
@@ -60,19 +59,16 @@ export default function Home() {
         <section className='container d-flex justify-content-center'>
           <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4'>Ver todos os produtos</div>
         </section>
+      </Container>
         
-
-      </main>
-      
-      <main>
+      <div>
         <Banner
           imgImport={img1}
           conteudoTXT={"Você imagina, nós criamos! Também oferecemos decorações personalizadas feitas do jeitinho que você quiser. Nós criamos cada detalhe com carinho para deixar o ambiente ainda mais acolhedor e divertido."}
         />
-      </main>
-
+      </div>
 
       <MobileHeader />
-    </div>
+    </main>
   );
 }
