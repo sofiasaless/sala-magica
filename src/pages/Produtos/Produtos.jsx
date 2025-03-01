@@ -7,7 +7,7 @@ import NavProdutos from "../../components/NavProdutos/NavProdutos";
 
 export default function Produtos() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8' }}>
+    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
       <Header />
       <Container>
         <Titulo titulo={"Enfeites de parede"} upper={true} />

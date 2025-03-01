@@ -6,7 +6,7 @@ import MobileHeader from "../../components/MobileHeader/MobileHeader"
 
 export default function Favoritos() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8' }}>
+    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
       <Header />
       <Container>
         <Titulo titulo={"Lista de desejos"} />
