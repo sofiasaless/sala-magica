@@ -5,6 +5,8 @@ import Produtos from "./pages/Produtos/Produtos";
 import PerfilAdmin from "./pages/PerfilAdmin/PerfilAdmin";
 import PerfilRegular from "./pages/PerfilRegular/PerfilRegular";
 import NovoProduto from "./pages/NovoProduto/NovoProduto";
+import ListarProdutosEditar from "./pages/ListarProdutosEditar/ListarProdutosEditar";
+import EditarProduto from "./pages/EditarProduto/EditarProduto";
 
 export default function Rotas() {
   return (
@@ -43,6 +45,18 @@ export default function Rotas() {
         <Route path="/novo-produto"
           element={
             <NovoProduto />
+          }
+        />
+
+        <Route path="/editar-produtos"
+          element={
+            <ListarProdutosEditar />
+          }
+        />
+
+        <Route path="/editar-produto"
+          element={
+            <EditarProduto />
           }
         />
 

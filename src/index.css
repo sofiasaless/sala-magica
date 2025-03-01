@@ -41,3 +41,10 @@ html {
   background-color: var(--brancoFundo);
   /* font-family: "Fredoka", serif; */
 }
+
+@media screen and (max-width: 995px) {
+  main {
+    padding-bottom: 5rem;
+  }
+  
+}
