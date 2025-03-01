@@ -11,6 +11,7 @@ import Banner from '../../components/Banner/Banner';
 import img1 from '../../assets/banner/creative-thinking-animate.svg'
 import img2 from '../../assets/banner/kindergarten-student-animate.svg'
 import Container from '../../components/Container/Container';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
         </section>
 
         <section className='container d-flex justify-content-center'>
-          <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4'>Ver todos os produtos</div>
+          <Link to={'/produtos'} className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</Link>
         </section>
       </Container>
 
@@ -57,7 +58,7 @@ export default function Home() {
         </section>
 
         <section className='container d-flex justify-content-center'>
-          <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4'>Ver todos os produtos</div>
+          <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</div>
         </section>
       </Container>
         
