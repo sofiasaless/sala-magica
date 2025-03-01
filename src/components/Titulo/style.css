@@ -12,3 +12,8 @@ h4 {
   background-color: var(--cinzaUm);
   width: 15%;
 }
+
+.txt-admin {
+  color: var(--cinzaDois);
+  font-weight: 500;
+}

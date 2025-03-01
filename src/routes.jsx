@@ -4,6 +4,7 @@ import Favoritos from "./pages/Favoritos/Favoritos";
 import Produtos from "./pages/Produtos/Produtos";
 import PerfilAdmin from "./pages/PerfilAdmin/PerfilAdmin";
 import PerfilRegular from "./pages/PerfilRegular/PerfilRegular";
+import NovoProduto from "./pages/NovoProduto/NovoProduto";
 
 export default function Rotas() {
   return (
@@ -36,6 +37,12 @@ export default function Rotas() {
         <Route path="/perfil/regular"
           element={
             <PerfilRegular />
+          }
+        />
+
+        <Route path="/novo-produto"
+          element={
+            <NovoProduto />
           }
         />
 

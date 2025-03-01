@@ -1,0 +1,14 @@
+.btn-voltar {
+  width: 5rem;
+  background-color: var(--verdeUm);
+  cursor: pointer;
+}
+
+.btn-voltar:hover {
+  border-bottom: 3px solid var(--verdeDois);
+}
+
+.txt-voltar {
+  color: var(--verdeDois);
+  font-weight: 700;
+}

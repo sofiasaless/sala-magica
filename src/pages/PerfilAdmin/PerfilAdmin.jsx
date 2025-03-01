@@ -52,9 +52,9 @@ export default function PerfilAdmin() {
 
         <section className='mt-4 d-flex flex-column gap-2'>
 
-          <OpcaoAdmin imgOp={img1} descricao={'Anunciar novo produto no catálogo'}/>
-          <OpcaoAdmin imgOp={img2} descricao={'Editar/excluir produtos do catálogo'}/>
-          <OpcaoAdmin imgOp={img3} descricao={'Visualizar usuários'}/>
+          <OpcaoAdmin redirecionamento={'novo-produto'} imgOp={img1} descricao={'Anunciar novo produto no catálogo'}/>
+          <OpcaoAdmin redirecionamento={'editar-produtos'} imgOp={img2} descricao={'Editar/excluir produtos do catálogo'}/>
+          <OpcaoAdmin redirecionamento={'visualizar-usuarios'} imgOp={img3} descricao={'Visualizar usuários'}/>
 
         </section>
 

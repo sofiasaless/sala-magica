@@ -1,0 +1,7 @@
+.input-cadastro-produto {
+  background-color: var(--cinzaTres);
+}
+
+.input-cadastro-produto:focus {
+  background-color: var(--cinzaTres);
+}
