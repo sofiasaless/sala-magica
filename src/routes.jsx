@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Produtos from "./pages/Produtos/Produtos";
 import PerfilAdmin from "./pages/PerfilAdmin/PerfilAdmin";
+import PerfilRegular from "./pages/PerfilRegular/PerfilRegular";
 
 export default function Rotas() {
   return (
@@ -29,6 +30,12 @@ export default function Rotas() {
         <Route path="/perfil"
           element={
             <PerfilAdmin />
+          }
+        />
+
+        <Route path="/perfil/regular"
+          element={
+            <PerfilRegular />
           }
         />
 
