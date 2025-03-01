@@ -26,7 +26,7 @@ export default function Header() {
               <img src={favorito} className='me-2 mb-2' />
               Favoritos
             </Link>
-            <Link to={'/'} id='link' className="nav-link fonte-titulos">
+            <Link to={'/perfil'} id='link' className="nav-link fonte-titulos">
               <img src={perfil} className='me-2 mb-2' />
               Perfil
             </Link>

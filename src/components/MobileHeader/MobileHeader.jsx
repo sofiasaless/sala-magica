@@ -19,7 +19,7 @@ export default function MobileHeader() {
             <Link to={'/favoritos'} id='mobile-link' className="nav-link fonte-titulos">
               <img className='icones' src={favorito} />
             </Link>
-            <Link to={'/'} id='mobile-link' className="nav-link fonte-titulos">
+            <Link to={'/perfil'} id='mobile-link' className="nav-link fonte-titulos">
               <img className='icones' src={perfil} />
             </Link>
           </div>

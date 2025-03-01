@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Produtos from "./pages/Produtos/Produtos";
+import PerfilAdmin from "./pages/PerfilAdmin/PerfilAdmin";
 
 export default function Rotas() {
   return (
@@ -22,6 +23,12 @@ export default function Rotas() {
         <Route path="/produtos"
           element={
             <Produtos />
+          }
+        />
+
+        <Route path="/perfil"
+          element={
+            <PerfilAdmin />
           }
         />
 

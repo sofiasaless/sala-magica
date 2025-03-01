@@ -1,0 +1,15 @@
+.area-opcao {
+  background-color: var(--cinzaTres);
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.opcao-descricao {
+  color: var(--cinzaDois);
+  font-weight: 600;
+  font-size: large;
+}
+
+.area-opcao:hover {
+  transform: scale(1.05);
+}

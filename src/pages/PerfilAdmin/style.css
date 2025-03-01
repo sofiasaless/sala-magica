@@ -1,0 +1,73 @@
+@media screen and (max-width: 500px) {
+  .area-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 0 !important;
+  }
+}
+
+.input-perfil {
+  background-color: var(--cinzaTres);
+}
+
+.input-perfil:focus {
+  background-color: var(--cinzaTres);
+}
+
+.area-input {
+  flex: 1;
+}
+
+label {
+  color: var(--cinzaUm);
+  font-weight: 600;
+}
+
+form {
+  width: 100%;
+}
+
+.btn-opc {
+  border: 0;
+  cursor: pointer;
+}
+
+.btn-opc:hover {
+  background-color: transparent;
+}
+
+.btn-azul {
+  background-color: var(--azulUm);
+  color: var(--azulDois);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.btn-azul:hover {
+  background-color: var(--azulUm);
+  transform: none;
+  border-bottom: 3px solid var(--azulDois);
+}
+
+.btn-verm {
+  background-color: var(--vermelhoUm);
+  color: var(--vermelhoDois);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.btn-verm:hover {
+  background-color: var(--vermelhoUm);
+  transform: none;
+  border-bottom: 3px solid var(--vermelhoDois);
+}
+
+.area-sair {
+  cursor: pointer;
+}
+
+.txt-sair {
+  color: var(--cinzaDois);
+  font-weight: 600;
+  font-size: larger;
+}
