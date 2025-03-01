@@ -1,0 +1,36 @@
+#card-favorito {
+  width: 13rem;
+  background-color: var(--brancoFundo);
+  transition: all 0.5s ease;
+  border: 3px solid var(--cinzaUm);
+}
+
+#card-favorito:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+#card-photo-fav {
+  height: auto;
+  background-color: var(--cinzaUm);
+  border-bottom: 3px solid var(--cinzaUm);
+}
+
+.card-textos {
+  flex: 1;
+}
+
+.card-favorito-title {
+  color: var(--cinzaUm);
+  font-family: Fredoka, serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.card-text {
+  color: var(--vermelhoUm);
+  font-family: Fredoka, serif;
+  font-weight: 500;
+  font-size: 1rem;
+}

@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
-import Home from './pages/Home';
+import Rotas from './routes'
 
 function App() {
 
   return (
     <>
-      <Home />
+      <Rotas />
     </>
   )
 }
