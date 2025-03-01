@@ -6,7 +6,7 @@ import search from '../../assets/material/search.png'
 export default function NavProdutos() {
   return (
     <>
-      <div className="d-flex justify-content-between gap-3 mt-4">
+      <div className="area-nav d-flex justify-content-between gap-3 mt-4">
 
         <div className='area-pesquisa rounded-5 ps-3 d-flex align-items-center'>
           <input className='input-pesquisa' placeholder='Pesquisar...'/>

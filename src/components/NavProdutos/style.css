@@ -1,3 +1,14 @@
+@media screen and (max-width: 490px) {
+  .area-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-pesquisa {
+    padding: 0.4rem;
+  }
+}
+
 .filtro-drop {
   background-color: var(--cinzaTres);
 }
