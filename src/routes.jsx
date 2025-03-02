@@ -7,7 +7,8 @@ import PerfilRegular from "./pages/PerfilRegular/PerfilRegular";
 import NovoProduto from "./pages/NovoProduto/NovoProduto";
 import ListarProdutosEditar from "./pages/ListarProdutosEditar/ListarProdutosEditar";
 import EditarProduto from "./pages/EditarProduto/EditarProduto";
-import ListarUsuarios from "./pages/ListarUsuarios/ListarProdutosEditar";
+import ListarUsuarios from "./pages/ListarUsuarios/ListarUsuarios";
+import DetalheProduto from "./pages/DetalheProduto/DetalheProduto";
 
 export default function Rotas() {
   return (
@@ -64,6 +65,12 @@ export default function Rotas() {
         <Route path="/visualizar-usuarios"
           element={
             <ListarUsuarios />
+          }
+        />
+
+        <Route path="/produto"
+          element={
+            <DetalheProduto />
           }
         />
 

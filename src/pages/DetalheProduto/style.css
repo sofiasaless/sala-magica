@@ -1,0 +1,78 @@
+@media screen and (max-width: 995px) {
+  .secao-detalhe {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .infos {
+    text-align: center;
+  }
+  
+}
+
+.area-total {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.divisao {
+  flex: 1;
+}
+
+.img-foco {
+  height: 18rem;
+}
+
+.img-opcao {
+  height: 5rem;
+  border: 2px solid var(--cinzaUm);
+  cursor: pointer;
+}
+
+.nome-produto {
+  font-weight: 600;
+  color: var(--cinzaUm);
+}
+
+.preco-produto {
+  font-weight: 600;
+  color: var(--vermelhoUm);
+}
+
+.img-manip {
+  height: 2rem;
+  cursor: pointer;
+}
+
+.btn-encomendar {
+  all: unset;
+  text-decoration: none;
+  color: white;
+  background-color: var(--cinzaUm);
+  font-weight: 600;
+  font-size: large;
+  transition: all 0.5s ease;
+}
+
+.btn-encomendar:active,
+.btn-encomendar:focus {
+  background-color: var(--cinzaUm);
+  outline: none;
+}
+
+.btn-encomendar:hover {
+  transform: scale(1.15);
+}
+
+.p-desc {
+  color: var(--cinzaUm);
+  text-align: justify;
+}
+
+.produto-desc-titulo {
+  font-weight: 500;
+  color: var(--cinzaUm);
+  font-size: large;
+}
