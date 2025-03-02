@@ -1,0 +1,29 @@
+.card-usuario-area {
+  width: 100%;
+}
+
+.card-usuario-body {
+  background-color: var(--cinzaTres);
+  width: 100%;
+  cursor: pointer;
+}
+
+.card-area-nome {
+  flex: 1;
+}
+
+.img-card-usuario {
+  height: 1.8rem;
+}
+
+h5 {
+  color: var(--cinzaUm);
+}
+
+.card-usuario-infos {
+  width: 98%;
+  border-bottom: 2px solid var(--cinzaUm);
+  border-left: 2px solid var(--cinzaUm);
+  border-right: 2px solid var(--cinzaUm);
+  transition: all 0.5s ease;
+}
