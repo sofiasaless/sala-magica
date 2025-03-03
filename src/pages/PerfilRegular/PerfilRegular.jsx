@@ -6,13 +6,14 @@ import Header from "../../components/Header/Header";
 import Titulo from "../../components/Titulo/Titulo";
 import MobileHeader from "../../components/MobileHeader/MobileHeader"
 import Perfil from "../../components/Perfil/Perfil";
+import Footer from "../../components/Footer/Footer";
 
 // assets
 import imgSair from '../../assets/material/inbox-out.png'
 
 export default function PerfilRegular() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
+    <main style={{ backgroundColor: '#e8e8e8'}}>
       <Header />
       <Container>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />
@@ -56,6 +57,8 @@ export default function PerfilRegular() {
         </section>
 
       </Container>
+
+      <Footer />
 
       <MobileHeader />
     </main>

@@ -12,10 +12,11 @@ import img1 from '../../assets/banner/creative-thinking-animate.svg'
 import img2 from '../../assets/banner/kindergarten-student-animate.svg'
 import Container from '../../components/Container/Container';
 import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
 
 export default function Home() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
+    <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
       <Container>
         <Titulo titulo={"Enfeites de parede"} upper={true} />
@@ -68,6 +69,8 @@ export default function Home() {
           conteudoTXT={"Você imagina, nós criamos! Também oferecemos decorações personalizadas feitas do jeitinho que você quiser. Nós criamos cada detalhe com carinho para deixar o ambiente ainda mais acolhedor e divertido."}
         />
       </div>
+
+      <Footer />
 
       <MobileHeader />
     </main>

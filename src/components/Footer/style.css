@@ -1,0 +1,35 @@
+@media screen and (max-width: 995px) {
+  .conteudos {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}
+
+footer {
+  background-color: var(--cinzaUm);
+}
+
+.conteudo {
+  flex: 1;
+}
+
+.conteudo, span, p {
+  color: white;
+  text-align: justify;
+  font-weight: 600;
+}
+
+.link-footer {
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.img-social {
+  cursor: pointer;
+}
+
+.conteudos {
+  padding-top: 5rem;
+}

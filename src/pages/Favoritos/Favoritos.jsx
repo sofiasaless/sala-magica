@@ -3,10 +3,11 @@ import Container from "../../components/Container/Container";
 import Header from "../../components/Header/Header";
 import Titulo from "../../components/Titulo/Titulo";
 import MobileHeader from "../../components/MobileHeader/MobileHeader"
+import Footer from "../../components/Footer/Footer"
 
 export default function Favoritos() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
+    <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
       <Container>
         <Titulo titulo={"Lista de desejos"} />
@@ -24,6 +25,8 @@ export default function Favoritos() {
         </section>
 
       </Container>
+
+      <Footer />
 
       <MobileHeader />
     </main>

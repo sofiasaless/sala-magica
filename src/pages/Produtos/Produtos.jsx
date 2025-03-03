@@ -4,10 +4,11 @@ import Header from "../../components/Header/Header";
 import Titulo from "../../components/Titulo/Titulo";
 import MobileHeader from "../../components/MobileHeader/MobileHeader"
 import NavProdutos from "../../components/NavProdutos/NavProdutos";
+import Footer from "../../components/Footer/Footer";
 
 export default function Produtos() {
   return (
-    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
+    <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
       <Container>
         <Titulo titulo={"Enfeites de parede"} upper={true} />
@@ -32,6 +33,8 @@ export default function Produtos() {
         </section>
 
       </Container>
+
+      <Footer />
 
       <MobileHeader />
     </main>

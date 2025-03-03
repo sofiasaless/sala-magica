@@ -4,6 +4,7 @@ import './style.css'
 import Container from "../../components/Container/Container";
 import Titulo from "../../components/Titulo/Titulo";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import MobileHeader from "../../components/MobileHeader/MobileHeader"
 
 // assets
@@ -101,6 +102,8 @@ export default function DetalheProduto() {
         </Container>
 
       </div>
+      
+      <Footer />
 
       <MobileHeader />
     </main>
