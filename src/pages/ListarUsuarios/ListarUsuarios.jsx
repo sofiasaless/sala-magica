@@ -10,7 +10,7 @@ export default function ListarUsuarios() {
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
-      <Container>
+      <div style={{height: '100vh'}} className="container">
 
         <BotaoVoltar />
 
@@ -24,7 +24,7 @@ export default function ListarUsuarios() {
 
         </section>
 
-      </Container>
+      </div>
 
       <MobileHeader />
     </main>

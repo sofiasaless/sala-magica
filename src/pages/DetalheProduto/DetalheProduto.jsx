@@ -70,7 +70,7 @@ export default function DetalheProduto() {
                 <span className='produto-desc-titulo'>Medidas (AltxComp)</span>
                 <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
                 <p className='p-desc m-0'>Altura: 50,00cm</p>
-                <p>Comprimento: 30,00cm</p>
+                <p className='p-desc'>Comprimento: 30,00cm</p>
               </div>
 
               <div>

@@ -1,3 +1,10 @@
+.area-introducao {
+  background: url('../../assets/background/wave-haikei.svg');
+  background-size: cover;
+  background-color: var(--verdeDois);
+  height: 100vh;
+}
+
 section {
   /* background-color: chocolate; */
   display: flex;
@@ -10,4 +17,9 @@ section {
   text-transform: uppercase;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.bt-verTodos:hover {
+  transform: scale(1.15);
 }

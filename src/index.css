@@ -21,7 +21,7 @@
   --vermelhoUm: #ff6b6b;
   --vermelhoDois: #a24444;
 
-  background-color: var(--brancoFundo);
+  /* background-color: var(--brancoFundo); */
 }
 
 .fonte-titulos {
@@ -34,12 +34,9 @@
   font-weight: 400;
 }
 
-body,
-main,
-section,
-html {
-  background-color: var(--brancoFundo);
-  /* font-family: "Fredoka", serif; */
+main {
+  background-image: url('/src/assets/background/scattered-forcefields.svg');
+  background-repeat: space;
 }
 
 @media screen and (max-width: 995px) {

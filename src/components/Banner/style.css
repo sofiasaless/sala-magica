@@ -17,7 +17,6 @@
 
 .container-banner {
   width: 100%;
-  background-color: var(--verdeDois);
 }
 
 .barra-banner {
@@ -37,4 +36,22 @@
   color: var(--brancoFundo);
   font-size: larger;
   font-weight: 500;
+}
+
+.gradient-background {
+  background: linear-gradient(45deg,#000000,#3c838c,#a8e6cf);
+  background-size: 180% 180%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

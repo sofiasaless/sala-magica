@@ -3,7 +3,7 @@ import './style.css'
 export default function Banner( { imgImport, conteudoTXT } ) {
   return (
     <>
-      <div className="container-banner py-4 my-4 d-flex flex-column">
+      <div className="gradient-background container-banner py-4 my-4 d-flex flex-column">
         
         <div className='container container-banner-interno d-flex align-items-center justify-content-center gap-5'>
           

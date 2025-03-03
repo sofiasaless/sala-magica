@@ -14,7 +14,7 @@ export default function CardProdutoEditar() {
         <div className="card-body d-flex justify-content-center align-items-center text-center">
           <div className='card-textos'>
             <h5 className="card-favorito-title">Calendário</h5>
-            <p className="card-text m-0">R$50,00</p>
+            <p className="p-card m-0">R$50,00</p>
             <span style={{color: 'var(--cinzaDois)', fontWeight: 500}}>Anunciado há 5 dias...</span>
           </div>
         </div>

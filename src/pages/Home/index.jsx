@@ -18,6 +18,11 @@ export default function Home() {
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
+
+      <div className='area-introducao'>
+
+      </div>
+
       <Container>
         <Titulo titulo={"Enfeites de parede"} upper={true} />
 

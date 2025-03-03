@@ -12,7 +12,7 @@ export default function CardProdutoFavorito() {
       <div id='card-favorito' className="card rounded-5 shadow-sm">
         <img id='card-photo-fav' src={template} className="card-img-top rounded-5" alt="..." />
         <div className="card-body d-flex">
-          <div className='card-textos'>
+          <div className='card-textos d-flex flex-column'>
             <h5 className="card-favorito-title">Calendário</h5>
             <p className="card-text">R$50,00</p>
           </div>

@@ -8,6 +8,8 @@
 
 footer {
   background-color: var(--cinzaUm);
+  background-image: url('../../assets/background/wave-haikei-footer2.svg');
+  background-size: cover;
 }
 
 .conteudo {

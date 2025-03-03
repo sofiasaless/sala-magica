@@ -18,11 +18,11 @@ export default function CardUsuario () {
       >
         <div className='card-area-nome d-flex align-items-center gap-2'>
           <img className='img-card-usuario' src={imgIcon} alt="" />
-          <h5 className='m-0'>Maria Isabel da Silva</h5>
+          <h6 className='m-0'>Maria Isabel da Silva</h6>
         </div>
 
         <div>
-          <h5 className='m-0 text-uppercase'>Normal</h5>
+          <h6 className='m-0 text-uppercase'>Normal</h6>
         </div>
       </div>
 

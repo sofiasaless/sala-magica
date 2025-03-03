@@ -18,7 +18,7 @@ export default function PerfilAdmin() {
   return (
     <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
       <Header />
-      <Container>
+      <div style={{height: '100vh'}} className='container'>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />
 
         <Perfil />
@@ -69,7 +69,7 @@ export default function PerfilAdmin() {
           </div>
         </section>
 
-      </Container>
+      </div>
 
       <MobileHeader />
     </main>
