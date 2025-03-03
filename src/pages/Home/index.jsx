@@ -1,4 +1,5 @@
 import './style.css'
+import { Link } from 'react-router-dom';
 
 // componentes
 import Header from '../../components/Header/Header'
@@ -6,20 +7,27 @@ import CardProduto from '../../components/CardProduto/CardProduto'
 import Titulo from '../../components/Titulo/Titulo';
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
 import Banner from '../../components/Banner/Banner';
+import Container from '../../components/Container/Container';
+import Footer from '../../components/Footer/Footer';
 
 // assets
 import img1 from '../../assets/banner/creative-thinking-animate.svg'
 import img2 from '../../assets/banner/kindergarten-student-animate.svg'
-import Container from '../../components/Container/Container';
-import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
+import imgHome from '../../assets/material/img-home.png'
 
 export default function Home() {
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
 
-      <div className='area-introducao'>
+      <div className='area-introducao d-flex pt-5 align-items-start'>
+        <div className='d-flex justify-content-center align-items-center flex-column container'>
+          <h1 className='h1-home'>Bem-vindo a Sala Mágica!</h1>
+          <p className='text-center p-home'>O site perfeito para encontrar enfeites e decorações personalizadas para maternais e jardins de infância. Nossos produtos são feitos com muito carinho e criatividade, utilizando materiais como EVA, papel crepom e TNT para deixar cada espaço mais alegre e acolhedor.</p>
+          <div className='div-img-home d-flex align-items-center justify-content-center rounded-circle shadow-lg'>
+            <img className='img-home' src={imgHome} alt="" />
+          </div>
+        </div>
 
       </div>
 
@@ -46,7 +54,7 @@ export default function Home() {
 
       <div>
         <Banner
-          imgImport={img2} 
+          imgImport={img2}
           conteudoTXT={"Personalizamos cada peça com carinho, utilizando EVA, papel crepom, TNT e muito mais para criar um ambiente lúdico e inspirador para suas crianças."}
         />
       </div>
@@ -67,7 +75,7 @@ export default function Home() {
           <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</div>
         </section>
       </Container>
-        
+
       <div>
         <Banner
           imgImport={img1}

@@ -23,3 +23,31 @@ section {
 .bt-verTodos:hover {
   transform: scale(1.15);
 }
+
+.div-img-home {
+  width: 40%;
+  background-color: #245056;
+}
+
+.img-home {
+  width: 100%;
+  height: auto;
+}
+
+.h1-home {
+  color: white;
+  font-family: "Griffy", system-ui;
+  font-weight: 900;
+}
+
+.p-home {
+  font-size: 1.3rem;
+  font-family: "Griffy", system-ui;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 990px) {
+  .div-img-home {
+    width: 70% !important;
+  }
+}
