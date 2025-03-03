@@ -14,7 +14,7 @@ footer {
   flex: 1;
 }
 
-.conteudo, span, p {
+.conteudo, .span-footer, p {
   color: white;
   text-align: justify;
   font-weight: 600;

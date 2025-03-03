@@ -1,0 +1,71 @@
+.area {
+  background-color: white;
+}
+
+.img-logo {
+  height: 5rem;
+}
+
+.area {
+  width: max-content;
+}
+
+.input-login {
+  border: 2px solid var(--cinzaUm);
+}
+
+.btn-form {
+  all: unset;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: large;
+  transition: all 0.5s ease;
+}
+
+.btn-form:active,
+.btn-form:focus {
+  outline: none;
+}
+
+.btn-form:hover {
+  transform: scale(1.15);
+}
+
+.btn-um {
+  border: 3px solid var(--verdeDois);
+  background: var(--verdeDois);
+}
+
+.btn-um:active,
+.btn-um:focus {
+  background: var(--verdeDois);
+  outline: none;
+}
+
+.btn-dois {
+  color: var(--verdeDois);
+  border: 3px solid var(--verdeDois);
+}
+
+.btn-dois:active,
+.btn-dois:focus {
+  color: var(--verdeDois);
+  border: 3px solid var(--verdeDois);
+  outline: none;
+}
+
+.span-form {
+  color: var(--verdeDois);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 390px) {
+  .bts-area {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.2rem !important;
+  }
+}
