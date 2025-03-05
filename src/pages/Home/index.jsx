@@ -15,7 +15,28 @@ import img1 from '../../assets/banner/creative-thinking-animate.svg'
 import img2 from '../../assets/banner/kindergarten-student-animate.svg'
 import imgHome from '../../assets/material/img-home.png'
 
+// outros imports
+import ProdutosFs from '../../firebase/firestore/ProdutoFs';
+import { useEffect, useState } from 'react';
+
 export default function Home() {
+
+  // instância para o firestore
+  const produtosRepositorio = ProdutosFs();
+
+  const [produtosSecaoUm, setProdutosSecaoUm] = useState([])
+
+  const recuperarProSecUm = async () => {
+    await produtosRepositorio.recuperarProdutos().then((resultado) => {
+      setProdutosSecaoUm(resultado);
+    })
+  }
+
+  useEffect(() => {
+    recuperarProSecUm();
+
+  }, [])
+
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
@@ -36,13 +57,17 @@ export default function Home() {
 
         <section className='container py-5 gap-4 justify-content-center'>
 
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
+          {
+            (produtosSecaoUm.length != 0)
+              ?
+              produtosSecaoUm.map((p) => (
+                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              ))
+              :
+              <>
+                <h1>ta vazio</h1>
+              </>
+          }
 
         </section>
 
@@ -64,10 +89,17 @@ export default function Home() {
 
         <section className='container py-5 gap-4 justify-content-center'>
 
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
+          {
+            (produtosSecaoUm.length != 0)
+              ?
+              produtosSecaoUm.map((p) => (
+                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              ))
+              :
+              <>
+                <h1>ta vazio</h1>
+              </>
+          }
 
         </section>
 

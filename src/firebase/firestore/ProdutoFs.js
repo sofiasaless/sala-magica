@@ -1,7 +1,7 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { database } from '../config'
 
-export default function ProdutosFs () {
+export default function ProdutosFs() {
 
   const db = database;
 
@@ -14,7 +14,25 @@ export default function ProdutosFs () {
     }
   }
 
+  async function recuperarProdutos() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "produtos"));
+      let listaProdutos = []
+      querySnapshot.forEach((doc) => {
+        listaProdutos.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+      // console.log(listaProdutos)
+      return listaProdutos;
+    } catch (error) {
+      console.log('erro ao recuperar produtos: ', error)
+    }
+  }
+
   return {
-    anunciarProduto
+    anunciarProduto,
+    recuperarProdutos
   }
 }

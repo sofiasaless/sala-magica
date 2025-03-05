@@ -1,6 +1,10 @@
 @media screen and (max-width: 490px) {
   .card {
-    width: 9rem !important;
+    width: 10rem !important;
+  }
+
+  .card-title {
+    font-size: large !important;
   }
 
 }
@@ -29,7 +33,7 @@
   color: var(--brancoFundo);
   font-family: Fredoka, serif;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 0;
 }
 
@@ -37,5 +41,5 @@
   color: var(--vermelhoUm);
   font-family: Fredoka, serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: larger !important;
 }
