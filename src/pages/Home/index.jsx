@@ -25,16 +25,20 @@ export default function Home() {
   const produtosRepositorio = ProdutosFs();
 
   const [produtosSecaoUm, setProdutosSecaoUm] = useState([])
+  const [produtosSecaoDois, setProdutosSecaoDois] = useState([])
 
-  const recuperarProSecUm = async () => {
-    await produtosRepositorio.recuperarProdutos().then((resultado) => {
+  const recuperarProdutos = async () => {
+    await produtosRepositorio.recuperarProdutoPorCategoria('Enfeites de parede').then((resultado) => {
       setProdutosSecaoUm(resultado);
+    })
+
+    await produtosRepositorio.recuperarProdutoPorCategoria('Materiais educativos').then((resultado) => {
+      setProdutosSecaoDois(resultado);
     })
   }
 
   useEffect(() => {
-    recuperarProSecUm();
-
+    recuperarProdutos();
   }, [])
 
   return (
@@ -61,11 +65,15 @@ export default function Home() {
             (produtosSecaoUm.length != 0)
               ?
               produtosSecaoUm.map((p) => (
-                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
               ))
               :
               <>
-                <h1>ta vazio</h1>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </>
           }
 
@@ -90,14 +98,18 @@ export default function Home() {
         <section className='container py-5 gap-4 justify-content-center'>
 
           {
-            (produtosSecaoUm.length != 0)
+            (produtosSecaoDois.length != 0)
               ?
-              produtosSecaoUm.map((p) => (
-                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              produtosSecaoDois.map((p) => (
+                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
               ))
               :
               <>
-                <h1>ta vazio</h1>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </>
           }
 

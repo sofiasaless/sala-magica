@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore';
 import { database } from '../config'
 
 export default function ProdutosFs() {
@@ -31,8 +31,46 @@ export default function ProdutosFs() {
     }
   }
 
+  async function recuperarProdutoPorId(id) {
+    try {
+      const result = await getDoc(doc(db, 'produtos', id))
+      console.log('id sendo passado: ', id)
+      return result.data();
+    } catch (error) {
+      console.error("Erro ao recuperar o produto:", error);
+    }
+  }
+
+  async function recuperarProdutoPorCategoria(categoria) {
+    try {
+      let listaProdutos = []
+      const produtoRef = collection(db, "produtos");
+  
+      // consulta por categoria
+      const produtosQuery = query(
+        produtoRef,
+        where("categoria", "==", categoria),
+        limit(7)
+      );
+  
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        listaProdutos.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+
+      return listaProdutos;
+    } catch (error) {
+      console.log('erro ao buscar produtos ', error);
+    }
+  }
+
   return {
     anunciarProduto,
-    recuperarProdutos
+    recuperarProdutos,
+    recuperarProdutoPorId,
+    recuperarProdutoPorCategoria
   }
 }

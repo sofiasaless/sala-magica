@@ -70,7 +70,7 @@ export default function Rotas() {
           }
         />
 
-        <Route path="/produto"
+        <Route path="/produto/:id"
           element={
             <DetalheProduto />
           }
