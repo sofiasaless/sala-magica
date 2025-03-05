@@ -45,7 +45,11 @@ export default function Produtos() {
               ))
               :
               <>
-                <h1>ta vazio</h1>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </>
           }
 
