@@ -5,3 +5,32 @@
 .input-cadastro-produto:focus {
   background-color: var(--cinzaTres);
 }
+
+.btn-opc {
+  all: unset;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: large;
+}
+
+.btn-opc:active,
+.btn-opc:focus {
+  outline: none;
+}
+
+.btn-azul {
+  background-color: var(--azulUm);
+  color: var(--azulDois);
+}
+
+.btn-azul:active,
+.btn-azul:focus {
+  background-color: var(--azulUm);
+  color: var(--azulDois);
+}
+
+.btn-azul:disabled {
+  cursor: not-allowed;
+  border: 0;
+}
