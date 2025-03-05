@@ -61,11 +61,15 @@ export default function Home() {
             (produtosSecaoUm.length != 0)
               ?
               produtosSecaoUm.map((p) => (
-                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
               ))
               :
               <>
-                <h1>ta vazio</h1>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </>
           }
 
@@ -93,11 +97,15 @@ export default function Home() {
             (produtosSecaoUm.length != 0)
               ?
               produtosSecaoUm.map((p) => (
-                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
               ))
               :
               <>
-                <h1>ta vazio</h1>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </>
           }
 

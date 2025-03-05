@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { database } from '../config'
 
 export default function ProdutosFs() {
@@ -31,8 +31,19 @@ export default function ProdutosFs() {
     }
   }
 
+  async function recuperarProdutoPorId(id) {
+    try {
+      const result = await getDoc(doc(db, 'produtos', id))
+      console.log('id sendo passado: ', id)
+      return result.data();
+    } catch (error) {
+      console.error("Erro ao recuperar o produto:", error);
+    }
+  }
+
   return {
     anunciarProduto,
-    recuperarProdutos
+    recuperarProdutos,
+    recuperarProdutoPorId
   }
 }

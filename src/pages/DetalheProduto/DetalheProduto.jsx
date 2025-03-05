@@ -14,8 +14,49 @@ import imgCompart from '../../assets/material/share.png'
 import imgCart from '../../assets/material/cart.png'
 import CardProduto from '../../components/CardProduto/CardProduto';
 
+// imports
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import ProdutosFs from '../../firebase/firestore/ProdutoFs';
+
 
 export default function DetalheProduto() {
+
+  // parametros passados na rota
+  const { id } = useParams()
+
+  // instância para o firestore
+  const produtoRepositorio = ProdutosFs()
+
+  // states
+  const [produto, setProduto] = useState()
+  const [produtoSugestao, setProdutoSugestao] = useState([])
+
+  const [imagemEmFoco, setImagemEmFoco] = useState('')
+
+  // recuperando o produto
+  const recuperarProdutoEmFoco = async () => {
+    console.log('entrei aqui')
+    await produtoRepositorio.recuperarProdutoPorId(id).then((resultado) => {
+      setProduto(resultado)
+      setImagemEmFoco(resultado.imagemCapa)
+    })
+  }
+
+  const recuperarProdutosSugestao = async () => {
+    await produtoRepositorio.recuperarProdutos().then((resultado) => {
+      setProdutoSugestao(resultado);
+    })
+  }
+
+  useEffect(() => {
+
+    recuperarProdutoEmFoco()
+
+    recuperarProdutosSugestao()
+  }, [id])
+
+
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
@@ -26,59 +67,85 @@ export default function DetalheProduto() {
 
           <div className='container secao-detalhe d-flex p-4 justify-content-center'>
 
-            <div className='divisao produto-imgs d-flex flex-column justify-content-center align-itens-center'>
-              <div className='principal-img mb-3 d-flex justify-content-center'>
-                <img className='img-foco rounded-4' src={imgProduto} alt="" />
-              </div>
-              <div className='outras-imgs d-flex gap-2 align-items-center justify-content-center flex-wrap'>
-                <div><img className='img-opcao rounded-2' src={imgProduto} alt="outra" /></div>
-                <div><img className='img-opcao rounded-2' src={imgProduto} alt="outra" /></div>
-                <div><img className='img-opcao rounded-2' src={imgProduto} alt="outra" /></div>
-                <div><img className='img-opcao rounded-2' src={imgProduto} alt="outra" /></div>
-                <div><img className='img-opcao rounded-2' src={imgProduto} alt="outra" /></div>
-              </div>
-            </div>
+            {
+              (produto === undefined) ?
+                <>
+                  <div className="text-center">
+                    <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </>
+                :
+                <>
+                  <div className='divisao produto-imgs d-flex flex-column justify-content-center align-itens-center'>
+                    <div className='principal-img mb-3 d-flex justify-content-center'>
+                      <img className='img-foco rounded-4' src={imagemEmFoco} alt="" />
+                    </div>
+                    <div className='outras-imgs d-flex gap-2 align-items-center justify-content-center flex-wrap'>
+                      <div onClick={(e) => {
+                        e.preventDefault()
+                        setImagemEmFoco(produto.imagemCapa)
+                      }}>
+                        <img className='img-opcao rounded-2' src={produto.imagemCapa} alt="outra" />
+                      </div>
 
-            <div className='divisao produto-info d-flex flex-column align-items-center justify-content-center'>
+                      {
+                        produto.imagens.map((p) => (
+                          <div onClick={(e) => {
+                            e.preventDefault()
+                            setImagemEmFoco(p)
+                          }}>
+                            <img className='img-opcao rounded-2' src={p} alt="outra" />
+                          </div>
+                        ))
+                      }
 
-              <div className='d-flex flex-column infos'>
-                <h2 className='nome-produto text-uppercase'>Calendário</h2>
-                <h4 className='preco-produto'>R$ 50,00</h4>
-              </div>
+                    </div>
+                  </div>
 
-              <div className='d-flex gap-4 mt-3 mb-4'>
-                <img src={imgCompart} className='img-manip' alt="" />
-                <img src={imgFav} className='img-manip' alt="" />
-              </div>
+                  <div className='divisao produto-info d-flex flex-column align-items-start justify-content-center ps-3'>
 
-              <div className='d-flex'>
-                <button className='btn-encomendar p-3 text-uppercase d-flex align-items-center rounded-3'>
-                  Encomendar o seu
-                  <img src={imgCart} className='ms-3' alt="" />
-                </button>
-              </div>
-            </div>
+                    <div className='d-flex flex-column infos'>
+                      <h2 className='nome-produto text-uppercase'>{produto.titulo}</h2>
+                      <h4 className='preco-produto'>R$ {Number(produto.preco).toFixed(2)}</h4>
+                    </div>
 
-            <div className='divisao produto-descr d-flex flex-column gap-4'>
-              <div>
-                <span className='produto-desc-titulo'>Descrição do produto</span>
-                <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
-                <p className='p-desc m-0 lh-sm'>O calendário de parede faz parte da nossa coleção de decorações para sala de aula, ele  pode ser fixado na parede e é excelente para interação com as crianças ao abordar meses do ano e dias da semanas.</p>
-              </div>
+                    <div className='d-flex gap-4 mt-3 mb-4'>
+                      <img src={imgCompart} className='img-manip' alt="" />
+                      <img src={imgFav} className='img-manip' alt="" />
+                    </div>
 
-              <div>
-                <span className='produto-desc-titulo'>Medidas (AltxComp)</span>
-                <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
-                <p className='p-desc m-0'>Altura: 50,00cm</p>
-                <p className='p-desc'>Comprimento: 30,00cm</p>
-              </div>
+                    <div className='d-flex'>
+                      <button className='btn-encomendar p-3 text-uppercase d-flex align-items-center rounded-3'>
+                        Encomendar o seu
+                        <img src={imgCart} className='ms-3' alt="" />
+                      </button>
+                    </div>
+                  </div>
 
-              <div>
-                <span className='produto-desc-titulo'>Confecção e modelagem</span>
-                <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
-                <p className='p-desc m-0  lh-sm'>A decoração é confeccionada com folhas de papel E.V.A de várias cores, cola para madeira/isopor e muito carinho! O material garante a firmeza e durabilidade necessária para se manter conservado na sala de aula durante todo o período letivo.</p>
-              </div>
-            </div>
+                  <div className='divisao produto-descr d-flex flex-column gap-4'>
+                    <div>
+                      <span className='produto-desc-titulo'>Descrição do produto</span>
+                      <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
+                      <p className='p-desc m-0 lh-sm'>{produto.descricao}</p>
+                    </div>
+
+                    <div style={{ width: '100%' }}>
+                      <span className='produto-desc-titulo'>Medidas (AltxComp)</span>
+                      <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
+                      <p className='p-desc m-0'>Altura: {Number(produto.altura).toFixed(2)}cm</p>
+                      <p className='p-desc'>Comprimento: {Number(produto.comprimento).toFixed(2)}cm</p>
+                    </div>
+
+                    <div>
+                      <span className='produto-desc-titulo'>Confecção e modelagem</span>
+                      <div className='my-1 rounded-3' style={{ width: '40%', height: '3px', background: 'var(--cinzaUm)' }}></div>
+                      <p className='p-desc m-0  lh-sm'>{produto.modelagem}</p>
+                    </div>
+                  </div>
+                </>
+            }
 
           </div>
 
@@ -89,20 +156,28 @@ export default function DetalheProduto() {
 
           <section className='container py-5 gap-4 justify-content-center'>
 
-            <CardProduto />
-            <CardProduto />
-            <CardProduto />
-            <CardProduto />
-            <CardProduto />
-            <CardProduto />
-            <CardProduto />
+            {
+              (produtoSugestao.length != 0)
+              ?
+              produtoSugestao.map((p) => (
+                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              ))
+              :
+              <>
+                <div className="text-center">
+                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </>
+            }
 
           </section>
 
         </Container>
 
       </div>
-      
+
       <Footer />
 
       <MobileHeader />
