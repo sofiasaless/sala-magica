@@ -11,10 +11,12 @@ import ListarUsuarios from "./pages/ListarUsuarios/ListarUsuarios";
 import DetalheProduto from "./pages/DetalheProduto/DetalheProduto";
 import Entrar from "./pages/Entrar/Entrar";
 import Cadastrar from "./pages/Cadastrar/Cadastrar";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function Rotas() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/"
           element={
