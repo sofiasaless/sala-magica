@@ -41,7 +41,7 @@ export default function ProdutosFs() {
     }
   }
 
-  async function recuperarProdutoPorCategoria(categoria) {
+  async function recuperarProdutoPorCategoriaHome(categoria) {
     try {
       let listaProdutos = []
       const produtoRef = collection(db, "produtos");
@@ -67,10 +67,62 @@ export default function ProdutosFs() {
     }
   }
 
+  async function recuperarProdutoPorCategoria(categoria) {
+    try {
+      let listaProdutos = []
+      const produtoRef = collection(db, "produtos");
+  
+      // consulta por categoria
+      const produtosQuery = query(
+        produtoRef,
+        where("categoria", "==", categoria),
+      );
+  
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        listaProdutos.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+
+      return listaProdutos;
+    } catch (error) {
+      console.log('erro ao buscar produtos ', error);
+    }
+  }
+
+  async function recuperarProdutosSugestao() {
+    try {
+      let listaProdutos = []
+      const produtoRef = collection(db, "produtos");
+  
+      // consulta por categoria
+      const produtosQuery = query(
+        produtoRef,
+        limit(5)
+      );
+  
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        listaProdutos.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+
+      return listaProdutos;
+    } catch (error) {
+      console.log('erro ao buscar produtos para sugestão', error);
+    }
+  }
+
   return {
     anunciarProduto,
     recuperarProdutos,
     recuperarProdutoPorId,
+    recuperarProdutoPorCategoriaHome,
+    recuperarProdutosSugestao,
     recuperarProdutoPorCategoria
   }
 }
