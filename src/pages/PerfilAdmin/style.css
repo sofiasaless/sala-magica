@@ -50,10 +50,17 @@ form {
 }
 
 .btn-verm {
+  all: unset;
   background-color: var(--vermelhoUm);
   color: var(--vermelhoDois);
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+.btn-verm:active,
+.btn-verm:focus {
+  background-color: var(--vermelhoUm);
+  color: var(--vermelhoDois);
 }
 
 .btn-verm:hover {
