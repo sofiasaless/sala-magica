@@ -1,3 +1,4 @@
+// componentes
 import CardProduto from "../../components/CardProduto/CardProduto";
 import Container from "../../components/Container/Container";
 import Header from "../../components/Header/Header";
@@ -6,18 +7,40 @@ import MobileHeader from "../../components/MobileHeader/MobileHeader"
 import NavProdutos from "../../components/NavProdutos/NavProdutos";
 import Footer from "../../components/Footer/Footer";
 import ProdutosFs from "../../firebase/firestore/ProdutoFs";
+
+// imports
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Produtos() {
+
+  // categoria de produtos
+  const location = useLocation();
+  const [categoria, setCategoria] = useState(location.state);
 
   // instância para o firestore
   const produtosRepositorio = ProdutosFs();
 
-  const [produtosSecaoUm, setProdutosSecaoUm] = useState([])
+  const [produtosTotal, setProdutosTotal] = useState([])
 
   const recuperarProSecUm = async () => {
-    await produtosRepositorio.recuperarProdutos().then((resultado) => {
-      setProdutosSecaoUm(resultado);
+    await produtosRepositorio.recuperarProdutoPorCategoria(categoria).then((resultado) => {
+      setProdutosTotal(resultado);
+    })
+  }
+
+  const filtrarPorDropdown = async (categoriaEsc) => {
+    if (categoriaEsc === "Todos produtos") {
+      await produtosRepositorio.recuperarProdutos().then((resultado) => {
+        setCategoria(categoriaEsc)
+        setProdutosTotal(resultado)  
+      })
+      return
+    }
+
+    await produtosRepositorio.recuperarProdutoPorCategoria(categoriaEsc).then((resultado) => {
+      setCategoria(categoriaEsc);
+      setProdutosTotal(resultado)
     })
   }
 
@@ -31,17 +54,17 @@ export default function Produtos() {
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
       <Container>
-        <Titulo titulo={"Enfeites de parede"} upper={true} />
+        <Titulo titulo={categoria} upper={true} />
 
-        <NavProdutos />
+        <NavProdutos emFiltrar={filtrarPorDropdown}/>
 
         <section className='container py-5 gap-4 justify-content-center'>
 
           {
-            (produtosSecaoUm.length != 0)
+            (produtosTotal.length != 0)
               ?
-              produtosSecaoUm.map((p) => (
-                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              produtosTotal.map((p) => (
+                <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} id={p.id} />
               ))
               :
               <>

@@ -38,14 +38,14 @@ export default function PerfilAdmin() {
         </form>
 
         <div className='p-0 mb-4 d-flex gap-3'>
-          <div className="p-2 px-3 rounded-4 btn-opc btn-azul">
+          <button className="p-2 px-3 rounded-4 btn-opc btn-azul">
             Editar perfil
             <i class="bi bi-pencil-fill ms-2"></i>
-          </div>
-          <div className="p-2 px-3 rounded-4 btn-opc btn-verm">
+          </button>
+          <button className="p-2 px-3 rounded-4 btn-verm">
             Excluir conta
             <i class="bi bi-trash3-fill ms-2"></i>
-          </div>
+          </button>
         </div>
 
         <Titulo titulo={'Opções de administrador'} />

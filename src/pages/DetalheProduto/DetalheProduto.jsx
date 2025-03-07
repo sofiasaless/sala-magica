@@ -44,7 +44,7 @@ export default function DetalheProduto() {
   }
 
   const recuperarProdutosSugestao = async () => {
-    await produtoRepositorio.recuperarProdutos().then((resultado) => {
+    await produtoRepositorio.recuperarProdutosSugestao().then((resultado) => {
       setProdutoSugestao(resultado);
     })
   }

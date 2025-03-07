@@ -28,11 +28,11 @@ export default function Home() {
   const [produtosSecaoDois, setProdutosSecaoDois] = useState([])
 
   const recuperarProdutos = async () => {
-    await produtosRepositorio.recuperarProdutoPorCategoria('Enfeites de parede').then((resultado) => {
+    await produtosRepositorio.recuperarProdutoPorCategoriaHome('Enfeites de parede').then((resultado) => {
       setProdutosSecaoUm(resultado);
     })
 
-    await produtosRepositorio.recuperarProdutoPorCategoria('Materiais educativos').then((resultado) => {
+    await produtosRepositorio.recuperarProdutoPorCategoriaHome('Materiais educativos').then((resultado) => {
       setProdutosSecaoDois(resultado);
     })
   }
@@ -80,7 +80,7 @@ export default function Home() {
         </section>
 
         <section className='container d-flex justify-content-center'>
-          <Link to={'/produtos'} className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</Link>
+          <Link to={`/produtos`} state={"Enfeites de parede"} className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</Link>
         </section>
       </Container>
 
@@ -116,7 +116,7 @@ export default function Home() {
         </section>
 
         <section className='container d-flex justify-content-center'>
-          <div className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</div>
+          <Link to={`/produtos`} state={"Materiais educativos"} className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver todos os produtos</Link>
         </section>
       </Container>
 
