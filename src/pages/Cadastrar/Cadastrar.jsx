@@ -1,6 +1,7 @@
 import './style.css'
 
 import logo from '../../assets/material/logo1.png'
+import { Link } from 'react-router-dom'
 
 export default function Cadastrar() {
   return (
@@ -47,7 +48,7 @@ export default function Cadastrar() {
 
           <div className='d-flex flex-column'>
             <span className='text-center span-form'>Já possui cadastro?</span>
-            <button className='btn-form btn-dois p-1 rounded-pill text-center'>Entrar</button>
+            <Link to={"/entrar"} className='btn-form btn-dois p-1 rounded-pill text-center'>Entrar</Link>
           </div>
         </div>
 

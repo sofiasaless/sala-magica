@@ -2,6 +2,9 @@ import './style.css'
 
 import logo from '../../assets/material/logo1.png'
 
+// imports
+import { Link } from 'react-router-dom'
+
 export default function Entrar() {
   return (
     <main style={{ background: 'var(--verdeUm)', height: '100vh' }} className='d-flex align-items-center justify-content-center'>
@@ -32,7 +35,7 @@ export default function Entrar() {
 
           <div className='d-flex flex-column'>
             <span className='text-center span-form'>Ainda não possui cadastro?</span>
-            <button className='btn-form btn-dois p-1 rounded-pill text-center'>Fazer cadastro</button>
+            <Link to={"/cadastrar"} className='btn-form btn-dois p-1 rounded-pill text-center'>Fazer cadastro</Link>
           </div>
         </div>
 
