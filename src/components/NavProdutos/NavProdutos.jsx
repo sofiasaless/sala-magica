@@ -3,7 +3,14 @@ import './style.css'
 // assets
 import search from '../../assets/material/search.png'
 
-export default function NavProdutos() {
+export default function NavProdutos( {emPesquisar, emFiltrar} ) {
+
+  const filtrando = (categoria) => {
+    categoria.preventDefault();
+
+    emFiltrar(categoria.target.value);
+  }
+
   return (
     <>
       <div className="area-nav d-flex justify-content-between gap-3 mt-4">
@@ -20,9 +27,11 @@ export default function NavProdutos() {
             Filtrar categoria
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
+            <li><option onClick={(e) => filtrando(e)} value={"Todos produtos"} className="dropdown-item" href="#">Todos produtos</option></li>
+            <li><option onClick={(e) => filtrando(e)} value={"Enfeites de parede"} className="dropdown-item" href="#">Enfeites de parede</option></li>
+            <li><option onClick={(e) => filtrando(e)} value={"Materiais educativos"} className="dropdown-item" href="#">Materiais educativos</option></li>
+            <li><option onClick={(e) => filtrando(e)} value={"Decoração individual"} className="dropdown-item" href="#">Decoração individual</option></li>
+            <li><option onClick={(e) => filtrando(e)} value={"Atividade pedagógica"} className="dropdown-item" href="#">Atividade pedagógica</option></li>
           </ul>
         </div>
 

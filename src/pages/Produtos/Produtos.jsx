@@ -16,16 +16,31 @@ export default function Produtos() {
 
   // categoria de produtos
   const location = useLocation();
-  const categoria = location.state;
+  const [categoria, setCategoria] = useState(location.state);
 
   // instância para o firestore
   const produtosRepositorio = ProdutosFs();
 
-  const [produtosSecaoUm, setProdutosSecaoUm] = useState([])
+  const [produtosTotal, setProdutosTotal] = useState([])
 
   const recuperarProSecUm = async () => {
     await produtosRepositorio.recuperarProdutoPorCategoria(categoria).then((resultado) => {
-      setProdutosSecaoUm(resultado);
+      setProdutosTotal(resultado);
+    })
+  }
+
+  const filtrarPorDropdown = async (categoriaEsc) => {
+    if (categoriaEsc === "Todos produtos") {
+      await produtosRepositorio.recuperarProdutos().then((resultado) => {
+        setCategoria(categoriaEsc)
+        setProdutosTotal(resultado)  
+      })
+      return
+    }
+
+    await produtosRepositorio.recuperarProdutoPorCategoria(categoriaEsc).then((resultado) => {
+      setCategoria(categoriaEsc);
+      setProdutosTotal(resultado)
     })
   }
 
@@ -39,16 +54,16 @@ export default function Produtos() {
     <main style={{ backgroundColor: '#e8e8e8' }}>
       <Header />
       <Container>
-        <Titulo titulo={"Enfeites de parede"} upper={true} />
+        <Titulo titulo={categoria} upper={true} />
 
-        <NavProdutos />
+        <NavProdutos emFiltrar={filtrarPorDropdown}/>
 
         <section className='container py-5 gap-4 justify-content-center'>
 
           {
-            (produtosSecaoUm.length != 0)
+            (produtosTotal.length != 0)
               ?
-              produtosSecaoUm.map((p) => (
+              produtosTotal.map((p) => (
                 <CardProduto key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} id={p.id} />
               ))
               :
