@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
 import { addDoc, collection } from "firebase/firestore";
@@ -96,6 +96,19 @@ export default function AuthService() {
       console.log(error.message)
       // An error happened.
     });
+  }
+
+  // verificando se há usuário logado no site
+  async function verificaEstadoLogin() {
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUsuario(user); // Usuário está logado
+      } else {
+        setUsuario(null); // Usuário não está logado
+      }
+    });
+
   }
 
   return {

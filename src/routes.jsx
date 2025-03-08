@@ -12,6 +12,7 @@ import DetalheProduto from "./pages/DetalheProduto/DetalheProduto";
 import Entrar from "./pages/Entrar/Entrar";
 import Cadastrar from "./pages/Cadastrar/Cadastrar";
 import ScrollToTop from "./components/ScrollToTop";
+import RotaProtegidaUser from "./pages/RotaProtegidaUser";
 
 export default function Rotas() {
   return (
@@ -26,7 +27,9 @@ export default function Rotas() {
 
         <Route path="/favoritos"
           element={
-            <Favoritos />
+            <RotaProtegidaUser>
+              <Favoritos />
+            </RotaProtegidaUser>
           }
         />
 
@@ -38,7 +41,9 @@ export default function Rotas() {
 
         <Route path="/perfil"
           element={
-            <PerfilAdmin />
+            <RotaProtegidaUser>
+              <PerfilAdmin />
+            </RotaProtegidaUser>
           }
         />
 
