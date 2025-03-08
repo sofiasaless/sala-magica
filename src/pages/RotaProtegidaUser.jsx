@@ -2,35 +2,19 @@
 import imgError from '../assets/material/paper-plane.png'
 
 // imports
-import { useEffect, useState } from "react";
-import { auth } from '../firebase/config'
-import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../firebase/authentication/useAuth';
 
 // componentes
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import MobileHeader from "../components/MobileHeader/MobileHeader";
-import { useNavigate } from 'react-router-dom';
 
 export default function RotaProtegidaUser({ children }) {
 
   const navegador = useNavigate()
 
-  const [usuario, setUsuario] = useState(null)
-
-  const verificaEstadoLogin = async () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUsuario(user)
-      } else {
-        setUsuario(null)
-      }
-    });
-  }
-
-  useEffect(() => {
-    verificaEstadoLogin()
-  }, [])
+  const usuario = useAuth()
 
   if (!usuario) {
     return (

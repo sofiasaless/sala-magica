@@ -49,7 +49,9 @@ export default function Rotas() {
 
         <Route path="/perfil/regular"
           element={
-            <PerfilRegular />
+            <RotaProtegidaUser>
+              <PerfilRegular />
+            </RotaProtegidaUser>
           }
         />
 
