@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { colorSpace } from "@cloudinary/url-gen/actions/delivery";
 
 export default function AuthService() {
 
@@ -100,7 +101,7 @@ export default function AuthService() {
 
   // verificando se há usuário logado no site
   async function verificaEstadoLogin() {
-    
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsuario(user); // Usuário está logado
@@ -111,10 +112,38 @@ export default function AuthService() {
 
   }
 
+  async function verificarPermissoes(email) {
+    try {
+      const usuarioRef = collection(db, "usuarios");
+
+      const produtosQuery = query(
+        usuarioRef,
+        where("email", "==", email),
+      );
+
+      let usuario
+
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        usuario = {id: doc.id, ...doc.data()}
+      })
+
+      if (usuario.role === 'USER') {
+        return false
+      } else {
+        return true
+      }
+    } catch (error) {
+      console.log('erro ao buscar usuario ', error);
+    }
+
+  }
+
   return {
     cadastrarNovoUsuário,
     entrarComUsuario,
-    desconectarUsuario
+    desconectarUsuario,
+    verificarPermissoes
   }
 
 }

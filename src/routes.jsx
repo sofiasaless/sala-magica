@@ -13,6 +13,8 @@ import Entrar from "./pages/Entrar/Entrar";
 import Cadastrar from "./pages/Cadastrar/Cadastrar";
 import ScrollToTop from "./components/ScrollToTop";
 import RotaProtegidaUser from "./pages/RotaProtegidaUser";
+import RotaProtegidaAdmin from "./pages/RotaProtegidaAdmin";
+import PerfilRedirecionamento from "./pages/PerfilRedirecionamento";
 
 export default function Rotas() {
   return (
@@ -41,9 +43,15 @@ export default function Rotas() {
 
         <Route path="/perfil"
           element={
-            <RotaProtegidaUser>
+            <PerfilRedirecionamento/>         
+          }
+        />
+
+        <Route path="/perfil/admin"
+          element={
+            <RotaProtegidaAdmin>
               <PerfilAdmin />
-            </RotaProtegidaUser>
+            </RotaProtegidaAdmin>
           }
         />
 
@@ -57,25 +65,33 @@ export default function Rotas() {
 
         <Route path="/novo-produto"
           element={
-            <NovoProduto />
+            <RotaProtegidaAdmin>
+              <NovoProduto />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/editar-produtos"
           element={
-            <ListarProdutosEditar />
+            <RotaProtegidaAdmin>
+              <ListarProdutosEditar />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/editar-produto"
           element={
-            <EditarProduto />
+            <RotaProtegidaAdmin>
+              <EditarProduto />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/visualizar-usuarios"
           element={
-            <ListarUsuarios />
+            <RotaProtegidaAdmin>
+              <ListarUsuarios />
+            </RotaProtegidaAdmin>
           }
         />
 

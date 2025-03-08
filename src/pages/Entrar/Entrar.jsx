@@ -34,7 +34,7 @@ export default function Entrar() {
         alert(msgErro)
       } else {
         alert('Login efetuado com sucesso! Te redirecionando...')
-        navegador('/perfil/regular')
+        navegador('/perfil')
       }
     })
 
