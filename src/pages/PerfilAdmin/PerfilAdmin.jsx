@@ -13,8 +13,12 @@ import img1 from '../../assets/material/box-open.png'
 import img2 from '../../assets/material/boxes.png'
 import img3 from '../../assets/material/admin-alt.png'
 import imgSair from '../../assets/material/inbox-out.png'
+import AuthService from '../../firebase/authentication/AuthService';
 
 export default function PerfilAdmin() {
+  
+  const authServ = AuthService()
+  
   return (
     <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
       <Header />
@@ -59,7 +63,7 @@ export default function PerfilAdmin() {
         </section>
 
         <section className='mt-4 d-flex justify-content-end'>
-          <div className='d-flex align-items-center area-sair'>
+          <div className='d-flex align-items-center area-sair' onClick={() => authServ.desconectarUsuario()}>
             <div className='me-3'>
               <span className='text-decoration-underline txt-sair'>Sair</span>
             </div>

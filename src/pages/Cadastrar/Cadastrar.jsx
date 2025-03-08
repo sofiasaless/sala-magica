@@ -29,7 +29,7 @@ export default function Cadastrar() {
       nomeCompleto: nomeCompleto,
       telefone: telefone,
       email: email,
-      senha: senha
+      senha: senha,
     }
 
     await authServ.cadastrarNovoUsuário(obj).then((resultado) => {

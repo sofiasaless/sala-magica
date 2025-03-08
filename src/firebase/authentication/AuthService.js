@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
 import { addDoc, collection } from "firebase/firestore";
@@ -9,7 +9,7 @@ export default function AuthService() {
 
   // cadastrando usuário no firebase
   async function cadastrarNovoUsuário(usuario) {
-    
+
     return createUserWithEmailAndPassword(auth, usuario.email, usuario.senha)
       .then(async (userCredential) => {
         // Signed up
@@ -22,7 +22,8 @@ export default function AuthService() {
           nomeCompleto: usuario.nomeCompleto,
           email: user.email,
           telefone: usuario.telefone,
-          role: 'USER' 
+          role: 'USER',
+          dataCadastro: new Date()
         }
 
         // console.log(objUsuario)
@@ -52,17 +53,34 @@ export default function AuthService() {
   }
 
   // entrando com usuario no firebase
-  async function entrarComUsuario(email, senha) {
+  async function entrarComUsuario(usuario) {
 
-    signInWithEmailAndPassword(auth, email, senha)
+    return signInWithEmailAndPassword(auth, usuario.email, usuario.senha)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         // ...
+        console.log('logado com sucesso')
+        // console.log(user)
+
+        return {
+          status: true,
+          mensagem: 'Usuário logado com sucesso!'
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+
+        console.log('erro ao tentar fazer login')
+        console.log(errorCode)
+        console.log(errorMessage)
+
+        return {
+          status: false,
+          mensagem: 'Ocorreu um erro ao tentar fazr login!',
+          erro: errorCode
+        }
       })
 
   }
@@ -71,7 +89,11 @@ export default function AuthService() {
   async function desconectarUsuario() {
     signOut(auth).then(() => {
       // Sign-out successful.
+      console.log('logout efetuado com sucesso')
     }).catch((error) => {
+      console.log('erro ao tentar fazer logout')
+      console.log(error.code)
+      console.log(error.message)
       // An error happened.
     });
   }
