@@ -36,7 +36,7 @@ export default function DetalheProduto() {
 
   // recuperando o produto
   const recuperarProdutoEmFoco = async () => {
-    console.log('entrei aqui')
+    // console.log('entrei aqui')
     await produtoRepositorio.recuperarProdutoPorId(id).then((resultado) => {
       setProduto(resultado)
       setImagemEmFoco(resultado.imagemCapa)

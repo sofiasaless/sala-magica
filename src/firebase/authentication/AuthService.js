@@ -1,8 +1,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
-import { colorSpace } from "@cloudinary/url-gen/actions/delivery";
+import { addDoc, collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 export default function AuthService() {
 
@@ -99,19 +98,6 @@ export default function AuthService() {
     });
   }
 
-  // verificando se há usuário logado no site
-  async function verificaEstadoLogin() {
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUsuario(user); // Usuário está logado
-      } else {
-        setUsuario(null); // Usuário não está logado
-      }
-    });
-
-  }
-
   async function verificarPermissoes(email) {
     try {
       const usuarioRef = collection(db, "usuarios");
@@ -125,7 +111,7 @@ export default function AuthService() {
 
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
-        usuario = {id: doc.id, ...doc.data()}
+        usuario = { id: doc.id, ...doc.data() }
       })
 
       if (usuario.role === 'USER') {
@@ -139,11 +125,66 @@ export default function AuthService() {
 
   }
 
+  async function retornarInfosUsuario(email) {
+    try {
+      const usuarioRef = collection(db, "usuarios");
+
+      const produtosQuery = query(
+        usuarioRef,
+        where("email", "==", email),
+      );
+
+      let usuario
+
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        usuario = { id: doc.id, ...doc.data() }
+      })
+
+      return usuario;
+    } catch (error) {
+      console.log('erro ao buscar usuario ', error);
+    }
+
+  }
+
+  async function atualizarPerfilUsuario(email, nomeCompleto, telefone) {
+    try {
+      const usuarioRef = collection(db, "usuarios");
+
+      const produtosQuery = query(
+        usuarioRef,
+        where("email", "==", email),
+      );
+
+      let usuarioId
+
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        usuarioId = doc.id
+      })
+
+      const usuarioAtualizarRef = doc(db, "usuarios", usuarioId);
+      await updateDoc(usuarioAtualizarRef,
+        {
+          nomeCompleto: nomeCompleto,
+          telefone: telefone
+        }
+      );
+
+    } catch (error) {
+      console.log('erro ao atualizar usuario ', error);
+    }
+
+  }
+
   return {
     cadastrarNovoUsuário,
     entrarComUsuario,
     desconectarUsuario,
-    verificarPermissoes
+    verificarPermissoes,
+    retornarInfosUsuario,
+    atualizarPerfilUsuario
   }
 
 }

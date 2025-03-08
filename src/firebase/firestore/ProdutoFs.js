@@ -34,7 +34,7 @@ export default function ProdutosFs() {
   async function recuperarProdutoPorId(id) {
     try {
       const result = await getDoc(doc(db, 'produtos', id))
-      console.log('id sendo passado: ', id)
+      // console.log('id sendo passado: ', id)
       return result.data();
     } catch (error) {
       console.error("Erro ao recuperar o produto:", error);
