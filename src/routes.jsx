@@ -12,6 +12,9 @@ import DetalheProduto from "./pages/DetalheProduto/DetalheProduto";
 import Entrar from "./pages/Entrar/Entrar";
 import Cadastrar from "./pages/Cadastrar/Cadastrar";
 import ScrollToTop from "./components/ScrollToTop";
+import RotaProtegidaUser from "./pages/RotaProtegidaUser";
+import RotaProtegidaAdmin from "./pages/RotaProtegidaAdmin";
+import PerfilRedirecionamento from "./pages/PerfilRedirecionamento";
 
 export default function Rotas() {
   return (
@@ -26,7 +29,9 @@ export default function Rotas() {
 
         <Route path="/favoritos"
           element={
-            <Favoritos />
+            <RotaProtegidaUser>
+              <Favoritos />
+            </RotaProtegidaUser>
           }
         />
 
@@ -38,37 +43,55 @@ export default function Rotas() {
 
         <Route path="/perfil"
           element={
-            <PerfilAdmin />
+            <PerfilRedirecionamento/>         
+          }
+        />
+
+        <Route path="/perfil/admin"
+          element={
+            <RotaProtegidaAdmin>
+              <PerfilAdmin />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/perfil/regular"
           element={
-            <PerfilRegular />
+            <RotaProtegidaUser>
+              <PerfilRegular />
+            </RotaProtegidaUser>
           }
         />
 
         <Route path="/novo-produto"
           element={
-            <NovoProduto />
+            <RotaProtegidaAdmin>
+              <NovoProduto />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/editar-produtos"
           element={
-            <ListarProdutosEditar />
+            <RotaProtegidaAdmin>
+              <ListarProdutosEditar />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/editar-produto"
           element={
-            <EditarProduto />
+            <RotaProtegidaAdmin>
+              <EditarProduto />
+            </RotaProtegidaAdmin>
           }
         />
 
         <Route path="/visualizar-usuarios"
           element={
-            <ListarUsuarios />
+            <RotaProtegidaAdmin>
+              <ListarUsuarios />
+            </RotaProtegidaAdmin>
           }
         />
 

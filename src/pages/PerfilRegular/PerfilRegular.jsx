@@ -10,8 +10,12 @@ import Footer from "../../components/Footer/Footer";
 
 // assets
 import imgSair from '../../assets/material/inbox-out.png'
+import AuthService from '../../firebase/authentication/AuthService';
 
 export default function PerfilRegular() {
+
+  const authServ = AuthService()
+
   return (
     <main style={{ backgroundColor: '#e8e8e8'}}>
       <Header />
@@ -35,18 +39,18 @@ export default function PerfilRegular() {
         </form>
 
         <div className='p-0 mb-4 d-flex gap-3'>
-          <div className="p-2 px-3 rounded-4 btn-opc btn-azul">
+          <button className="p-2 px-3 rounded-4 btn-opc btn-azul">
             Editar perfil
             <i class="bi bi-pencil-fill ms-2"></i>
-          </div>
-          <div className="p-2 px-3 rounded-4 btn-opc btn-verm">
+          </button>
+          <button className="p-2 px-3 rounded-4 btn-verm">
             Excluir conta
             <i class="bi bi-trash3-fill ms-2"></i>
-          </div>
+          </button>
         </div>
 
         <section className='mt-4 d-flex justify-content-end'>
-          <div className='d-flex align-items-center area-sair'>
+          <div className='d-flex align-items-center area-sair' onClick={() => authServ.desconectarUsuario()}>
             <div className='me-3'>
               <span className='text-decoration-underline txt-sair'>Sair</span>
             </div>
