@@ -3,5 +3,8 @@
 }
 
 .nome-usuario {
+  all: unset;
   font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--cinzaUm);
 }
