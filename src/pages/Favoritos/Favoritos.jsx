@@ -8,10 +8,13 @@ import Modal from "../../components/Modal/Modal";
 
 // imports
 import { useNavigate } from "react-router-dom";
+import CurtidasFs from "../../firebase/firestore/CurtidasFs";
 
 export default function Favoritos() {
 
   const navegador = useNavigate()
+
+  const curtidaServ = CurtidasFs()
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
@@ -28,6 +31,11 @@ export default function Favoritos() {
           <CardProdutoFavorito />
           <CardProdutoFavorito />
           <CardProdutoFavorito />
+
+          <button className="btn btn-danger" onClick={async () => {
+            // const resultado = await curtidaServ.recuperarCurtidas()
+            // console.log(resultado)
+          }}>testar curtidas</button>
 
         </section>
 
