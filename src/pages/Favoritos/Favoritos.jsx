@@ -9,12 +9,30 @@ import Modal from "../../components/Modal/Modal";
 // imports
 import { useNavigate } from "react-router-dom";
 import CurtidasFs from "../../firebase/firestore/CurtidasFs";
+import { useEffect, useState } from "react";
+import useAuth from "../../firebase/authentication/useAuth";
 
 export default function Favoritos() {
 
   const navegador = useNavigate()
 
+  const usuario = useAuth()
+
   const curtidaServ = CurtidasFs()
+
+  // states para produtos favoritos
+  const [produtosFavoritos, setProdutosFavoritos] = useState([])
+
+  useEffect(() => {
+    const recuperarFavoritos = async () => {
+      if (usuario) {
+        let produtosFavs = await curtidaServ.recuperarCurtidasUsuario(usuario.email)
+        setProdutosFavoritos(produtosFavs)
+      }
+    }
+
+    recuperarFavoritos()
+  }, [usuario])
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
@@ -24,18 +42,19 @@ export default function Favoritos() {
 
         <section className='container py-5 gap-4 justify-content-center'>
 
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-          <CardProdutoFavorito />
-
-          <button className="btn btn-danger" onClick={async () => {
-            // const resultado = await curtidaServ.recuperarCurtidas()
-            // console.log(resultado)
-          }}>testar curtidas</button>
+          {
+            (produtosFavoritos.length != 0)
+              ?
+              produtosFavoritos.map((p) => (
+                <CardProdutoFavorito key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+              ))
+              :
+              <>
+                <div className="text-center">
+                  <h2>Você ainda favoritou nenhum produto! :(</h2>
+                </div>
+              </>
+          }
 
         </section>
 

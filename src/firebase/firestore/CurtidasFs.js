@@ -82,7 +82,37 @@ export default function CurtidasFs() {
 
   // ... puxando os produtos curtidos pelo o usuario passado
   async function recuperarCurtidasUsuario(usuarioEmail) {
+    try {
+      const usuarioRef = await getReferenciaUsuario(usuarioEmail)
 
+      const curtidasColecaoRef = collection(db, "curtidas");
+      const curtidasQ = query(
+        curtidasColecaoRef, 
+        where("id_usuario", "==", usuarioRef)
+      );
+      const curtidasSnapshot = await getDocs(curtidasQ);
+
+      if (curtidasSnapshot.empty) {
+        console.log("Usuário não curtiu nenhum produto.");
+        return [];
+      }
+
+      // buscando os produtos das curtidas do usuario
+      const produtosCurtidos = await Promise.all(
+        curtidasSnapshot.docs.map(async (curtidaDoc) => {
+          const produtoRef = curtidaDoc.data().id_produto; // pega o id de referencia do produto
+          // com a referência 
+          const produtoSnap = await getDoc(produtoRef); 
+          return produtoSnap.exists() ? { id: produtoSnap.id, ...produtoSnap.data() } : null;
+        })
+      );
+
+      return produtosCurtidos.filter((produto) => produto !== null);
+
+    } catch (error) {
+      console.log('erro ao buscar produtos favoritos ', error)
+      return []
+    }
   }
 
   // funções auxiliares
@@ -106,6 +136,7 @@ export default function CurtidasFs() {
   return {
     registrarCurtida,
     apagarCurtida,
-    temCurtidaNoProduto
+    temCurtidaNoProduto,
+    recuperarCurtidasUsuario
   }
 }
