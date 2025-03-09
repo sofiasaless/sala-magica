@@ -9,7 +9,8 @@ import MobileHeader from "../../components/MobileHeader/MobileHeader"
 
 // assets
 import imgProduto from '../../assets/cards/calendario.png'
-import imgFav from '../../assets/material/heart_pink_contorno.png'
+import imgDesfav from '../../assets/material/heart_pink_contorno.png'
+import imgFav from '../../assets/material/heart_pink_preenchido.png'
 import imgCompart from '../../assets/material/share.png'
 import imgCart from '../../assets/material/cart.png'
 import CardProduto from '../../components/CardProduto/CardProduto';
@@ -18,6 +19,8 @@ import CardProduto from '../../components/CardProduto/CardProduto';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ProdutosFs from '../../firebase/firestore/ProdutoFs';
+import CurtidasFs from '../../firebase/firestore/CurtidasFs';
+import useAuth from '../../firebase/authentication/useAuth';
 
 
 export default function DetalheProduto() {
@@ -25,14 +28,18 @@ export default function DetalheProduto() {
   // parametros passados na rota
   const { id } = useParams()
 
+  // recuperando o usuário para 
+  const usuario = useAuth()
+
   // instância para o firestore
   const produtoRepositorio = ProdutosFs()
+  const curtidaRepositorio = CurtidasFs()
 
   // states
   const [produto, setProduto] = useState()
   const [produtoSugestao, setProdutoSugestao] = useState([])
-
   const [imagemEmFoco, setImagemEmFoco] = useState('')
+  const [curtido, setCurtido] = useState(false)
 
   // recuperando o produto
   const recuperarProdutoEmFoco = async () => {
@@ -49,12 +56,44 @@ export default function DetalheProduto() {
     })
   }
 
+  // ações de curtida do produto
+  const manipularCurtida = async () => {
+    if (usuario) {
+      if (curtido) {
+        // se o produto ja estiver curtido e o usuario escolher descurtir ....
+        await curtidaRepositorio.apagarCurtida(usuario.email, id);
+        setCurtido(false)
+      } else {
+        // curtindo o produto
+        await curtidaRepositorio.registrarCurtida(usuario.email, id);
+        setCurtido(true)
+      }
+      return
+    }
+
+    alert('Faça login para curtir o produto!')
+  }
+
+  // verificar se há curtida no produto
+  const verificarCurtida = async () => {
+    if (usuario) {
+      await curtidaRepositorio.temCurtidaNoProduto(usuario.email, id).then((resultado) => {
+        // console.log('tem curtida? ', resultado)
+        setCurtido(resultado)
+      })
+      return
+    }
+  }
+
   useEffect(() => {
 
     recuperarProdutoEmFoco()
 
     recuperarProdutosSugestao()
-  }, [id])
+
+    verificarCurtida()
+
+  }, [id, usuario])
 
 
   return (
@@ -113,7 +152,7 @@ export default function DetalheProduto() {
 
                     <div className='d-flex gap-4 mt-3 mb-4'>
                       <img src={imgCompart} className='img-manip' alt="" />
-                      <img src={imgFav} className='img-manip' alt="" />
+                      <img src={(curtido) ? imgFav : imgDesfav} className='img-manip' alt="" onClick={manipularCurtida} />
                     </div>
 
                     <div className='d-flex'>
@@ -158,18 +197,18 @@ export default function DetalheProduto() {
 
             {
               (produtoSugestao.length != 0)
-              ?
-              produtoSugestao.map((p) => (
-                <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
-              ))
-              :
-              <>
-                <div className="text-center">
-                  <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                ?
+                produtoSugestao.map((p) => (
+                  <CardProduto key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+                ))
+                :
+                <>
+                  <div className="text-center">
+                    <div style={{ color: 'var(--verdeDois)' }} className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
                   </div>
-                </div>
-              </>
+                </>
             }
 
           </section>
