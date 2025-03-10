@@ -10,8 +10,8 @@ export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
 
   return (
     <>
-      <Link to={`/produto/${id}`} className="card nav-link rounded-5 shadow-sm">
-        <img id='card-photo' src={imagemCapa} className="card-img-top rounded-5" alt="..."/>
+      <Link to={`/produto/${id}`} className="card nav-link rounded-4 shadow-sm">
+        <img id='card-photo' src={imagemCapa} className="card-img-top rounded-4" alt="..."/>
           <div className="card-body d-flex">
             <div className='card-textos'>
               <h5 className="card-title">{titulo}</h5>

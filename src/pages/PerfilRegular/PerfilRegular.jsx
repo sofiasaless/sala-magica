@@ -66,7 +66,7 @@ export default function PerfilRegular() {
       <section className='container d-flex flex-column' style={{ height: '90vh' }}>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />
 
-        <Perfil nomeUsuario={nome} admin={true} />
+        <Perfil nomeUsuario={nome}/>
 
         <form className=''>
           <div className='area-infos d-flex gap-3 justify-content-between'>
