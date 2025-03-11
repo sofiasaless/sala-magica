@@ -12,8 +12,8 @@ export default function CardProdutoFavorito( {id, titulo, preco, imagemCapa} ) {
 
   return (
     <>
-      <Link to={`/produto/${id}`} id='card-favorito' className="card rounded-5 shadow-sm nav-link">
-        <img id='card-photo-fav' src={imagemCapa} className="card-img-top rounded-5" alt="..." />
+      <Link to={`/produto/${id}`} id='card-favorito' className="card rounded-4 shadow-sm nav-link">
+        <img id='card-photo-fav' src={imagemCapa} className="rounded-4" alt="..." />
         <div className="card-body d-flex">
           <div className='card-textos d-flex flex-column'>
             <h5 className="card-favorito-title">{titulo}</h5>
