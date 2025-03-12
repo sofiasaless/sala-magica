@@ -45,6 +45,23 @@ export default function PerfilRegular() {
     setDesabilitado(true)
   }
 
+  // realizando exclusão da conta
+  const excluirConta = async () => {
+    if (window.confirm('Tem certeza que deseja excluir sua conta?').valueOf()) {
+      const senha = prompt("Digite sua senha para confirmar a exclusão da conta:");
+
+      if (!senha) {
+        alert("A senha é necessária para excluir a conta.");
+        return;
+      }
+
+      await authServ.deletarUsuario(usuario, usuario.email, senha)
+      return
+    }
+    console.log('sem excluir a conta')
+
+  }
+
   useEffect(() => {
     const recuperarDadosUsuario = async () => {
       if (usuario) {
@@ -66,7 +83,7 @@ export default function PerfilRegular() {
       <section className='container d-flex flex-column' style={{ height: '90vh' }}>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />
 
-        <Perfil nomeUsuario={nome}/>
+        <Perfil nomeUsuario={nome} />
 
         <form className=''>
           <div className='area-infos d-flex gap-3 justify-content-between'>
@@ -92,7 +109,7 @@ export default function PerfilRegular() {
             {txtBtn}
             <i class="bi bi-pencil-fill ms-2"></i>
           </button>
-          <button className="p-2 px-3 rounded-4 btn-verm">
+          <button className="p-2 px-3 rounded-4 btn-verm" onClick={excluirConta}>
             Excluir conta
             <i class="bi bi-trash3-fill ms-2"></i>
           </button>

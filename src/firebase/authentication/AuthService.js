@@ -1,7 +1,7 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, onAuthStateChanged, reauthenticateWithCredential, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
-import { addDoc, collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, runTransaction, updateDoc, where } from "firebase/firestore";
 
 export default function AuthService() {
 
@@ -125,31 +125,9 @@ export default function AuthService() {
 
   }
 
-  async function retornarInfosUsuario(email) {
-    try {
-      const usuarioRef = collection(db, "usuarios");
-
-      const produtosQuery = query(
-        usuarioRef,
-        where("email", "==", email),
-      );
-
-      let usuario
-
-      const querySnapshot = await getDocs(produtosQuery);
-      querySnapshot.forEach((doc) => {
-        usuario = { id: doc.id, ...doc.data() }
-      })
-
-      return usuario;
-    } catch (error) {
-      console.log('erro ao buscar usuario ', error);
-    }
-
-  }
-
   async function atualizarPerfilUsuario(email, nomeCompleto, telefone) {
     try {
+      // atualizar esse metodo para chamar a função auxiliar
       const usuarioRef = collection(db, "usuarios");
 
       const produtosQuery = query(
@@ -178,13 +156,101 @@ export default function AuthService() {
 
   }
 
+  async function retornarInfosUsuario(email) {
+    try {
+      const usuarioRef = collection(db, "usuarios");
+      
+      const produtosQuery = query(
+        usuarioRef,
+        where("email", "==", email),
+      );
+      
+      let usuario
+      
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        usuario = { id: doc.id, ...doc.data() }
+      })
+      
+      return usuario;
+    } catch (error) {
+      console.log('erro ao buscar usuario ', error);
+    }
+    
+  }
+
+  // para exclusão é necessária reautenticação
+  async function reautenticarUsuario (email, senha) {
+    try {
+      const user = auth.currentUser;
+      const credenciais = EmailAuthProvider.credential(email, senha);
+      await reauthenticateWithCredential(user, credenciais);
+      console.log("Usuário reautenticado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao reautenticar usuário:", error);
+      throw error;
+    }
+  }
+
+  async function deletarUsuario(usuario, email, senha) {
+    try {
+      // necessario fazer reatenticação
+      await reautenticarUsuario(email, senha)
+  
+      const usuarioRef = await getReferenciaUsuario(email)
+
+      // necessario recuperar as curtidas do usuario para exclui-las do firestore
+      const curtidasRef = collection(db, "curtidas");
+      const curtidasQuery = query(curtidasRef, where("id_usuario", "==", usuarioRef));
+      const curtidasSnapshot = await getDocs(curtidasQuery);
+  
+      // as exclusões vão acontecer em transação para caso a exclusão no authentication de errado
+      await runTransaction(db, async (transaction) => {
+        
+        curtidasSnapshot.docs.forEach((curtidaDoc) => {
+          transaction.delete(doc(db, "curtidas", curtidaDoc.id));
+        });
+  
+        // antes de excluir do firestore, necessario excluir do authentication
+        console.log("Usuário removido do Authentication com sucesso!");
+        await deleteUser(usuario);
+
+        console.log("Usuário e curtidas removidos do Firestore com sucesso!");
+        transaction.delete(usuarioRef);
+      });
+  
+    } catch (error) {
+      console.error("Erro ao tentar apagar usuário:", error);
+    }
+  }
+  
+  // função auxiliar buscar usuarios
+  async function getReferenciaUsuario(email) {
+    try {
+      const usuariosRef = collection(db, "usuarios");
+      const q = query(usuariosRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.error("Usuário não encontrado!");
+        return;
+      }
+      const usuarioRef = doc(db, "usuarios", querySnapshot.docs[0].id);
+      return usuarioRef
+    } catch (error) {
+      console.log('usuario nao encontrado ', error)
+    }
+  }
+
+
   return {
     cadastrarNovoUsuário,
     entrarComUsuario,
     desconectarUsuario,
     verificarPermissoes,
     retornarInfosUsuario,
-    atualizarPerfilUsuario
+    atualizarPerfilUsuario,
+    deletarUsuario
   }
 
 }

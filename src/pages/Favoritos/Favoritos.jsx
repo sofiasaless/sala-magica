@@ -49,11 +49,11 @@ export default function Favoritos() {
                 <CardProdutoFavorito key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
               ))
               :
-              <>
+              <div className="container" style={{height: '80vh'}}>
                 <div className="text-center">
                   <h2>Você ainda favoritou nenhum produto! :(</h2>
                 </div>
-              </>
+              </div>
           }
 
         </section>
