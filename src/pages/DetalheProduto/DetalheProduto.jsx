@@ -16,7 +16,7 @@ import imgCart from '../../assets/material/cart.png'
 import CardProduto from '../../components/CardProduto/CardProduto';
 
 // imports
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ProdutosFs from '../../firebase/firestore/ProdutoFs';
 import CurtidasFs from '../../firebase/firestore/CurtidasFs';
@@ -86,13 +86,21 @@ export default function DetalheProduto() {
   }
 
   // manipulando a encomenda do produto
-  const encomendarProduto = async () => {
+  const encomendarProduto = () => {
     const urlAtual = window.location.href; // vai puxar a url em que se encontra
     const mensagem = `Olá, tenho interesse em um dos seus produtos! \n Gostei desse aqui: ${urlAtual}`
     const mensagemCodificada = encodeURIComponent(mensagem);
     const numeroContato = import.meta.env.VITE_CONTACT_NUMBER
     const numeroFormatado = numeroContato.replace(/\D/g, '');
-    window.location.href = `https://wa.me/${numeroFormatado}?text=${mensagemCodificada}`;
+    window.open(`https://wa.me/${numeroFormatado}?text=${mensagemCodificada}`, "_blank");
+  }
+
+  const compartilharProduto = () => {
+    const urlAtual = window.location.href; // vai puxar a url em que se encontra
+    const mensagem = `Ei, olha o que eu achei!\n Decoração escolar ${produto.titulo} - ${urlAtual}`
+    const mensagemCodificada = encodeURIComponent(mensagem);
+    const linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemCodificada}`;
+    window.open(linkWhatsApp, "_blank");
   }
 
   useEffect(() => {
@@ -161,7 +169,7 @@ export default function DetalheProduto() {
                     </div>
 
                     <div className='d-flex gap-4 mt-3 mb-4'>
-                      <img src={imgCompart} className='img-manip' alt="" />
+                      <img src={imgCompart} className='img-manip' alt="" onClick={compartilharProduto}/>
                       <img src={(curtido) ? imgFav : imgDesfav} className='img-manip' alt="" onClick={manipularCurtida} />
                     </div>
 
@@ -221,6 +229,10 @@ export default function DetalheProduto() {
                 </>
             }
 
+          </section>
+
+          <section className='container d-flex justify-content-center'>
+            <Link to={`/produtos`} state={"Todos produtos"} className='bt-verTodos p-3 rounded-4 mt-1 mb-4 text-decoration-none'>Ver mais</Link>
           </section>
 
         </Container>

@@ -23,12 +23,18 @@ export default function Produtos() {
 
   // states para controle da página
   const [produtosTotal, setProdutosTotal] = useState([])
-  const [produtosPesquisa, setProdutosPesquisa] = useState([])
-  const [textoPesquisa, setTextoPesquisa] = useState('')
 
   const recuperarProSecUm = async () => {
+    if (categoria === "Todos produtos") {
+      await produtosRepositorio.recuperarProdutos().then((resultado) => {
+        setCategoria(categoria)
+        setProdutosTotal(resultado)
+      })
+      return
+    }
     await produtosRepositorio.recuperarProdutoPorCategoria(categoria).then((resultado) => {
-      setProdutosTotal(resultado);
+      setCategoria(categoria);
+      setProdutosTotal(resultado)
     })
   }
 
@@ -36,7 +42,7 @@ export default function Produtos() {
     if (categoriaEsc === "Todos produtos") {
       await produtosRepositorio.recuperarProdutos().then((resultado) => {
         setCategoria(categoriaEsc)
-        setProdutosTotal(resultado)  
+        setProdutosTotal(resultado)
       })
       return
     }
@@ -47,7 +53,7 @@ export default function Produtos() {
     })
   }
 
-  const textoDigitado = async (pesquisa) => {  
+  const textoDigitado = async (pesquisa) => {
     if (pesquisa != '') {
       await produtosRepositorio.recuperarProdutoPorTitulo(pesquisa).then((resultado) => {
         setProdutosTotal(resultado)
@@ -55,7 +61,7 @@ export default function Produtos() {
       return
     }
     recuperarProSecUm()
-    
+
   }
 
 
@@ -71,7 +77,7 @@ export default function Produtos() {
       <Container>
         <Titulo titulo={categoria} upper={true} />
 
-        <NavProdutos emPesquisar={textoDigitado} emFiltrar={filtrarPorDropdown}/>
+        <NavProdutos emPesquisar={textoDigitado} emFiltrar={filtrarPorDropdown} />
 
         <section className='container py-5 gap-4 justify-content-center'>
 
