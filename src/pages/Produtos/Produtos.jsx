@@ -21,7 +21,10 @@ export default function Produtos() {
   // instância para o firestore
   const produtosRepositorio = ProdutosFs();
 
+  // states para controle da página
   const [produtosTotal, setProdutosTotal] = useState([])
+  const [produtosPesquisa, setProdutosPesquisa] = useState([])
+  const [textoPesquisa, setTextoPesquisa] = useState('')
 
   const recuperarProSecUm = async () => {
     await produtosRepositorio.recuperarProdutoPorCategoria(categoria).then((resultado) => {
@@ -44,6 +47,18 @@ export default function Produtos() {
     })
   }
 
+  const textoDigitado = async (pesquisa) => {  
+    if (pesquisa != '') {
+      await produtosRepositorio.recuperarProdutoPorTitulo(pesquisa).then((resultado) => {
+        setProdutosTotal(resultado)
+      })
+      return
+    }
+    recuperarProSecUm()
+    
+  }
+
+
   useEffect(() => {
     recuperarProSecUm();
 
@@ -56,7 +71,7 @@ export default function Produtos() {
       <Container>
         <Titulo titulo={categoria} upper={true} />
 
-        <NavProdutos emFiltrar={filtrarPorDropdown}/>
+        <NavProdutos emPesquisar={textoDigitado} emFiltrar={filtrarPorDropdown}/>
 
         <section className='container py-5 gap-4 justify-content-center'>
 
