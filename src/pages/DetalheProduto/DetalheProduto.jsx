@@ -85,6 +85,16 @@ export default function DetalheProduto() {
     }
   }
 
+  // manipulando a encomenda do produto
+  const encomendarProduto = async () => {
+    const urlAtual = window.location.href; // vai puxar a url em que se encontra
+    const mensagem = `Olá, tenho interesse em um dos seus produtos! \n Gostei desse aqui: ${urlAtual}`
+    const mensagemCodificada = encodeURIComponent(mensagem);
+    const numeroContato = import.meta.env.VITE_CONTACT_NUMBER
+    const numeroFormatado = numeroContato.replace(/\D/g, '');
+    window.location.href = `https://wa.me/${numeroFormatado}?text=${mensagemCodificada}`;
+  }
+
   useEffect(() => {
 
     recuperarProdutoEmFoco()
@@ -156,7 +166,7 @@ export default function DetalheProduto() {
                     </div>
 
                     <div className='d-flex'>
-                      <button className='btn-encomendar p-3 text-uppercase d-flex align-items-center rounded-3'>
+                      <button className='btn-encomendar p-3 text-uppercase d-flex align-items-center rounded-3' onClick={encomendarProduto}>
                         Encomendar o seu
                         <img src={imgCart} className='ms-3' alt="" />
                       </button>

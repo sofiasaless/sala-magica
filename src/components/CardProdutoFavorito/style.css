@@ -11,9 +11,7 @@
   background-color: var(--brancoFundo);
   transition: all 0.5s ease;
   border: 3px solid var(--cinzaUm);
-  /* border-bottom: 3px solid var(--cinzaUm);
-  border-right: 3px solid var(--cinzaUm);
-  border-left: 3px solid var(--cinzaUm); */
+  border-top: 4px solid var(--cinzaUm);
 }
 
 #card-favorito:hover {
@@ -24,7 +22,9 @@
 #card-photo-fav {
   height: auto;
   background-color: var(--cinzaUm);
-  border: 3px solid var(--cinzaUm);
+  border-bottom: 3px solid var(--cinzaUm);
+  border-right: 3px solid var(--cinzaUm);
+  border-left: 3px solid var(--cinzaUm);
 }
 
 .card-textos {
