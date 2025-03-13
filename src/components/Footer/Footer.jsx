@@ -19,8 +19,8 @@ export default function Footer() {
             <div className='my-1 rounded-3' style={{ height: '2px', background: 'var(--cinzaDois)' }}></div>
 
             <div className='d-flex gap-4 mt-2'>
-              <a><img src={imgZap} alt="" className='img-social' /></a>
-              <a><img src={imgInsta} alt="" className='img-social' /></a>
+              <a href='https://wa.me/5585987539838?text=Ol%C3%A1%2C%20visitei%20o%20site%20a%20Sala%20M%C3%A1gica%2C%20gostaria%20de%20saber%20mais!'><img src={imgZap} alt="" className='img-social' /></a>
+              <a href='https://www.instagram.com/salamagicaa/'><img src={imgInsta} alt="" className='img-social' /></a>
               <a><img src={imgPin} alt="" className='img-social' /></a>
             </div>
 
