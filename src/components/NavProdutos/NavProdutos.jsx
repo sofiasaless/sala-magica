@@ -11,12 +11,16 @@ export default function NavProdutos( {emPesquisar, emFiltrar} ) {
     emFiltrar(categoria.target.value);
   }
 
+  const digitando = (texto) => {
+    emPesquisar(texto.target.value)
+  }
+
   return (
     <>
       <div className="area-nav d-flex justify-content-between gap-3 mt-4">
 
         <div className='area-pesquisa rounded-5 ps-3 d-flex align-items-center'>
-          <input className='input-pesquisa' placeholder='Pesquisar...'/>
+          <input className='input-pesquisa' placeholder='Pesquisar...' onChange={(e) => digitando(e)}/>
           <div style={{cursor: 'pointer'}} className='pe-3'>
             <img src={search} alt="" />
           </div>

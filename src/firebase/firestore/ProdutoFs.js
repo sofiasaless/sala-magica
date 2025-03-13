@@ -117,12 +117,39 @@ export default function ProdutosFs() {
     }
   }
 
+  async function recuperarProdutoPorTitulo(tituloPrefix) {
+    try {
+      let produtosList = [];
+      const prefixo = tituloPrefix[0].toUpperCase() + tituloPrefix.substring(1);
+      const produtosRef = collection(db, "produtos");
+
+      const produtosQuery = query(
+        produtosRef,
+        where("titulo", ">=", prefixo),
+        where("titulo", "<=", prefixo + "\uf8ff")
+      );
+
+      const querySnapshot = await getDocs(produtosQuery);
+      querySnapshot.forEach((doc) => {
+        produtosList.push({ 
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+
+      return produtosList;
+    } catch (error) {
+      console.log('erro ao buscar produtos ', error);
+    }
+  }
+
   return {
     anunciarProduto,
     recuperarProdutos,
     recuperarProdutoPorId,
     recuperarProdutoPorCategoriaHome,
     recuperarProdutosSugestao,
-    recuperarProdutoPorCategoria
+    recuperarProdutoPorCategoria,
+    recuperarProdutoPorTitulo
   }
 }
