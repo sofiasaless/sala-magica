@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore';
 import { database } from '../config'
 
 export default function ProdutosFs() {
@@ -45,14 +45,14 @@ export default function ProdutosFs() {
     try {
       let listaProdutos = []
       const produtoRef = collection(db, "produtos");
-  
+
       // consulta por categoria
       const produtosQuery = query(
         produtoRef,
         where("categoria", "==", categoria),
         limit(7)
       );
-  
+
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
         listaProdutos.push({
@@ -71,13 +71,13 @@ export default function ProdutosFs() {
     try {
       let listaProdutos = []
       const produtoRef = collection(db, "produtos");
-  
+
       // consulta por categoria
       const produtosQuery = query(
         produtoRef,
         where("categoria", "==", categoria),
       );
-  
+
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
         listaProdutos.push({
@@ -96,13 +96,13 @@ export default function ProdutosFs() {
     try {
       let listaProdutos = []
       const produtoRef = collection(db, "produtos");
-  
+
       // consulta por categoria
       const produtosQuery = query(
         produtoRef,
         limit(5)
       );
-  
+
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
         listaProdutos.push({
@@ -131,7 +131,7 @@ export default function ProdutosFs() {
 
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
-        produtosList.push({ 
+        produtosList.push({
           id: doc.id,
           ...doc.data()
         })
@@ -143,6 +143,55 @@ export default function ProdutosFs() {
     }
   }
 
+  async function atualizarProdutoPorId(id, produtoObj) {
+    try {
+      const produtoRef = doc(db, "produtos", id)
+
+      await updateDoc(produtoRef,
+        {
+          titulo: produtoObj.titulo,
+          preco: produtoObj.preco,
+          descricao: produtoObj.descricao,
+          altura: produtoObj.altura,
+          comprimento: produtoObj.comprimento,
+          modelagem: produtoObj.modelagem,
+          categoria: produtoObj.categoria,
+          imagemCapa: produtoObj.imagemCapa,
+          imagens: produtoObj.imagens,
+        }
+      );
+    } catch (error) {
+      console.log('ocorreu um erro ao tentar atualizar o produto ', error)
+    }
+  }
+
+  async function apagarProduto(id) {
+    try {
+      // referencia pro produto
+      const produtoRef = doc(db, "produtos", id)
+
+      // necessário apagar as curtidas relacionadas ao produto que vai ser excluido
+      const curtidasRef = collection(db, "curtidas");
+      const curtidaQuery = query(
+        curtidasRef,
+        where("id_produto", "==", produtoRef)
+      );
+      const curtidaSnapshot = await getDocs(curtidaQuery);
+
+      // deletando as curtidas encontradas
+      curtidaSnapshot.forEach(async (d) => {
+        await deleteDoc(doc(db, "curtidas", d.id));
+      })
+
+      await deleteDoc(produtoRef)
+
+      console.log('produto e suas curtidas apagadas com sucesso')
+
+    } catch (e) {
+      console.error("erro ao apagar a curtida:", e);
+    }
+  }
+
   return {
     anunciarProduto,
     recuperarProdutos,
@@ -150,6 +199,8 @@ export default function ProdutosFs() {
     recuperarProdutoPorCategoriaHome,
     recuperarProdutosSugestao,
     recuperarProdutoPorCategoria,
-    recuperarProdutoPorTitulo
+    recuperarProdutoPorTitulo,
+    atualizarProdutoPorId,
+    apagarProduto
   }
 }

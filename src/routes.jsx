@@ -79,7 +79,7 @@ export default function Rotas() {
           }
         />
 
-        <Route path="/editar-produto"
+        <Route path="/editar-produto/:id"
           element={
             <RotaProtegidaAdmin>
               <EditarProduto />
