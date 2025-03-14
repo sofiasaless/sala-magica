@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CurtidasFs from '../../firebase/firestore/CurtidasFs';
 import useAuth from '../../firebase/authentication/useAuth'
+import Modal from '../Modal/Modal';
 
 export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
 
@@ -18,6 +19,9 @@ export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
   const usuario = useAuth();
 
   const navegador = useNavigate()
+
+  // states para modal
+  const [mensagem, setMensagem] = useState('');
 
   // states
   const [curtido, setCurtido] = useState(false)
@@ -48,7 +52,8 @@ export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
       return
     }
 
-    alert('Faça login para curtir o produto!')
+    // alert('Faça login para curtir o produto!')
+    setMensagem('Para curtir os produtos da Sala Mágica é necessário estar logado.\nFaça login ou cadastre-se para curtir o produto!')
   }
 
   useEffect(() => {
@@ -70,6 +75,8 @@ export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
             </div>
           </div>
       </div>
+
+      {mensagem && <Modal mensagem={mensagem} setMensagem={setMensagem} tituloModal={'Ops...'} />}
     </>
   );
 }

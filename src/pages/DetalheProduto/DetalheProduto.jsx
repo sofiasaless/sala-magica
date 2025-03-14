@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 import ProdutosFs from '../../firebase/firestore/ProdutoFs';
 import CurtidasFs from '../../firebase/firestore/CurtidasFs';
 import useAuth from '../../firebase/authentication/useAuth';
+import Modal from '../../components/Modal/Modal';
 
 
 export default function DetalheProduto() {
@@ -34,6 +35,9 @@ export default function DetalheProduto() {
   // instância para o firestore
   const produtoRepositorio = ProdutosFs()
   const curtidaRepositorio = CurtidasFs()
+
+  // states para modal
+  const [mensagem, setMensagem] = useState('');
 
   // states
   const [produto, setProduto] = useState()
@@ -71,7 +75,8 @@ export default function DetalheProduto() {
       return
     }
 
-    alert('Faça login para curtir o produto!')
+    // alert('Faça login para curtir o produto!')
+    setMensagem('Para curtir os produtos da Sala Mágica é necessário estar logado.\nFaça login ou cadastre-se para curtir o produto!')
   }
 
   // verificar se há curtida no produto
@@ -242,6 +247,8 @@ export default function DetalheProduto() {
       <Footer />
 
       <MobileHeader />
+
+      {mensagem && <Modal mensagem={mensagem} setMensagem={setMensagem} tituloModal={'Ops...'} />}
     </main>
   );
 }

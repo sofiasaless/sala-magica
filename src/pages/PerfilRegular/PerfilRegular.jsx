@@ -13,6 +13,7 @@ import imgSair from '../../assets/material/inbox-out.png'
 import AuthService from '../../firebase/authentication/AuthService';
 import useAuth from '../../firebase/authentication/useAuth';
 import { useEffect, useState } from 'react';
+import Modal from '../../components/Modal/Modal';
 
 export default function PerfilRegular() {
 
@@ -30,6 +31,12 @@ export default function PerfilRegular() {
   const [txtBtn, setTxtBtn] = useState('Editar perfil')
   const [desabilitado, setDesabilitado] = useState(true)
 
+  // states para modal
+  const [mensagem, setMensagem] = useState('');
+  const [titulo, setTitulo] = useState('');
+  const [mensagemAcao, setMensagemAcao] = useState('');
+  const [tituloAcao, setTituloAcao] = useState('');
+
   // realizando atualizações no perfil do usuário
   const habilitarEdicaoSalvarAlteracao = async () => {
     if (txtBtn === 'Editar perfil') {
@@ -39,27 +46,30 @@ export default function PerfilRegular() {
     }
 
     await authServ.atualizarPerfilUsuario(email, nome, telefone)
-    alert('Perfil atualizado com sucesso!')
+    // alert('Perfil atualizado com sucesso!')
+
+    setMensagem('Perfil atualizado com sucesso!')
+    setTitulo('Sucesso!')
 
     setTxtBtn('Editar perfil')
     setDesabilitado(true)
   }
 
   // realizando exclusão da conta
+  const abrirModalExclusao = async () => {
+    setMensagemAcao('Tem certeza que deseja excluir sua conta?')
+    setTituloAcao('Atenção!')
+  }
+
   const excluirConta = async () => {
-    if (window.confirm('Tem certeza que deseja excluir sua conta?').valueOf()) {
-      const senha = prompt("Digite sua senha para confirmar a exclusão da conta:");
+    const senha = prompt("Digite sua senha para confirmar a exclusão da conta:");
 
-      if (!senha) {
-        alert("A senha é necessária para excluir a conta.");
-        return;
-      }
-
-      await authServ.deletarUsuario(usuario, usuario.email, senha)
-      return
+    if (!senha) {
+      alert("A senha é necessária para excluir a conta.");
+      return;
     }
-    console.log('sem excluir a conta')
 
+    await authServ.deletarUsuario(usuario, usuario.email, senha)
   }
 
   useEffect(() => {
@@ -109,7 +119,7 @@ export default function PerfilRegular() {
             {txtBtn}
             <i class="bi bi-pencil-fill ms-2"></i>
           </button>
-          <button className="p-2 px-3 rounded-4 btn-verm" onClick={excluirConta}>
+          <button className="p-2 px-3 rounded-4 btn-verm" onClick={abrirModalExclusao}>
             Excluir conta
             <i class="bi bi-trash3-fill ms-2"></i>
           </button>
@@ -131,6 +141,33 @@ export default function PerfilRegular() {
       <Footer />
 
       <MobileHeader />
+
+      {mensagem && <Modal mensagem={mensagem} setMensagem={setMensagem} tituloModal={titulo} />}
+
+      {/* modal de ação para exclusão */}
+      <div className="modal fade show" style={{ display: (mensagemAcao != '') ? "block" : "none" }} tabIndex="-1">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content shadow-lg" style={{ backgroundColor: 'var(--verdeDois)' }}>
+            <div className="modal-header">
+              <h5 style={{ color: 'white' }} className="modal-title">{tituloAcao}</h5>
+              <button type="button" className="btn-close btn-close-white" onClick={() => setMensagemAcao("")}></button>
+            </div>
+            <div className="modal-body">
+              <p className="p-modal">{mensagemAcao}</p>
+              <div className="d-flex gap-3 justify-content-end">
+                <button className='btn btn-secondary' onClick={() => {
+                  setMensagemAcao("")
+                }}>Cancelar</button>
+                <button className='btn btn-danger' onClick={() => {
+                  setMensagemAcao('')
+                  excluirConta()
+                }}>Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </main>
   );
 }

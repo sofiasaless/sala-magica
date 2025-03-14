@@ -3,6 +3,9 @@ import './style.css'
 // assets
 import logo from '../../assets/material/logo1.png'
 
+// componentes
+import Modal from '../../components/Modal/Modal'
+
 // imports
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -22,8 +25,16 @@ export default function Cadastrar() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
 
+  // states para o modal
+  const [mensagem, setMensagem] = useState('');
+  const [titulo, setTitulo] = useState('');
+
+  // controle de carregamento
+  const [carregando, setCarregando] = useState(false)
+
   // cadastrando o usuário
   const cadastrar = async () => {
+    setCarregando(true)
     // objeto usuario
     const obj = {
       nomeCompleto: nomeCompleto,
@@ -35,13 +46,17 @@ export default function Cadastrar() {
     await authServ.cadastrarNovoUsuário(obj).then((resultado) => {
       console.log(resultado)
       if (!(resultado.status)) {
-        let msgModal = (resultado.erro === AuthErrorCodes.EMAIL_EXISTS)?'Usuário com e-mail já cadastrado no sistema! Tente novamente com outro e-mail.'
-        :'Ocorreu um erro inesperado. Tente novamente.'
+        let msgModal = (resultado.erro === AuthErrorCodes.EMAIL_EXISTS) ? 'Usuário com e-mail já cadastrado no sistema! Tente novamente com outro e-mail.'
+          : 'Ocorreu um erro inesperado. Tente novamente.'
 
-        alert(msgModal)
+        setMensagem(msgModal);
+        setTitulo('Ops...')
+        setCarregando(false)
       } else {
-        alert(resultado.mensagem)
-        navegador('/entrar')
+        setMensagem(resultado.mensagem);
+        setCarregando(false)
+        setTitulo('Sucesso!')
+        setTimeout(() => navegador("/entrar"), 4000);
       }
     })
 
@@ -83,9 +98,17 @@ export default function Cadastrar() {
           <div className="bts-area d-flex align-items-end gap-4">
             <div>
               <button
-                type='submit'
-                className='btn-form btn-um p-1 px-4 rounded-pill text-center'>
-                Fazer cadastro
+                type='submit' className='btn-form btn-um p-1 px-4 rounded-pill text-center' disabled={carregando}>
+                {
+                  (carregando) ?
+                    <div className="spinner-border spinner-border-sm mx-5" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                    :
+                    <>
+                      Fazer cadastro
+                    </>
+                }
               </button>
             </div>
 
@@ -97,6 +120,8 @@ export default function Cadastrar() {
 
         </form>
       </div>
+
+      {mensagem && <Modal mensagem={mensagem} setMensagem={setMensagem} tituloModal={titulo} />}
     </main>
   )
 }
