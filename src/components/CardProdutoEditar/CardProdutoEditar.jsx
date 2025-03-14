@@ -15,7 +15,7 @@ export default function CardProdutoEditar( {titulo, preco, imagemCapa, id, dataA
           <div className='card-textos'>
             <h5 className="card-favorito-title">{titulo}</h5>
             <p className="p-card m-0">R${Number(preco).toFixed(2)}</p>
-            <span style={{color: 'var(--cinzaDois)', fontWeight: 500}}>Anunciado há 5 dias...</span>
+            <span style={{color: 'var(--cinzaDois)', fontWeight: 500}}>Anunciado em {new Date(dataAnuncio.seconds * 1000).toLocaleDateString('pt-BR', { dateStyle: 'full' })}</span>
           </div>
         </div>
       </Link>

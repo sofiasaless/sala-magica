@@ -46,7 +46,7 @@ export default function ListarProdutosEditar() {
             (produtosTotal.length != 0)
               ?
               produtosTotal.map((p) => (
-                <CardProdutoEditar key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} id={p.id} />
+                <CardProdutoEditar key={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} id={p.id} dataAnuncio={p.dataAnuncio} />
               ))
               :
               <>

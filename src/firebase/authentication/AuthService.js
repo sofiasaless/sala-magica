@@ -159,28 +159,28 @@ export default function AuthService() {
   async function retornarInfosUsuario(email) {
     try {
       const usuarioRef = collection(db, "usuarios");
-      
+
       const produtosQuery = query(
         usuarioRef,
         where("email", "==", email),
       );
-      
+
       let usuario
-      
+
       const querySnapshot = await getDocs(produtosQuery);
       querySnapshot.forEach((doc) => {
         usuario = { id: doc.id, ...doc.data() }
       })
-      
+
       return usuario;
     } catch (error) {
       console.log('erro ao buscar usuario ', error);
     }
-    
+
   }
 
   // para exclusão é necessária reautenticação
-  async function reautenticarUsuario (email, senha) {
+  async function reautenticarUsuario(email, senha) {
     try {
       const user = auth.currentUser;
       const credenciais = EmailAuthProvider.credential(email, senha);
@@ -196,21 +196,21 @@ export default function AuthService() {
     try {
       // necessario fazer reatenticação
       await reautenticarUsuario(email, senha)
-  
+
       const usuarioRef = await getReferenciaUsuario(email)
 
       // necessario recuperar as curtidas do usuario para exclui-las do firestore
       const curtidasRef = collection(db, "curtidas");
       const curtidasQuery = query(curtidasRef, where("id_usuario", "==", usuarioRef));
       const curtidasSnapshot = await getDocs(curtidasQuery);
-  
+
       // as exclusões vão acontecer em transação para caso a exclusão no authentication de errado
       await runTransaction(db, async (transaction) => {
-        
+
         curtidasSnapshot.docs.forEach((curtidaDoc) => {
           transaction.delete(doc(db, "curtidas", curtidaDoc.id));
         });
-  
+
         // antes de excluir do firestore, necessario excluir do authentication
         console.log("Usuário removido do Authentication com sucesso!");
         await deleteUser(usuario);
@@ -218,12 +218,29 @@ export default function AuthService() {
         console.log("Usuário e curtidas removidos do Firestore com sucesso!");
         transaction.delete(usuarioRef);
       });
-  
+
     } catch (error) {
       console.error("Erro ao tentar apagar usuário:", error);
     }
   }
-  
+
+  async function recuperarUsuarios() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "usuarios"));
+      let listaUsuarios = []
+      querySnapshot.forEach((doc) => {
+        listaUsuarios.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+      return listaUsuarios;
+    } catch (error) {
+      console.log('erro ao recuperar produtos: ', error)
+    }
+
+  }
+
   // função auxiliar buscar usuarios
   async function getReferenciaUsuario(email) {
     try {
@@ -250,7 +267,8 @@ export default function AuthService() {
     verificarPermissoes,
     retornarInfosUsuario,
     atualizarPerfilUsuario,
-    deletarUsuario
+    deletarUsuario,
+    recuperarUsuarios
   }
 
 }
