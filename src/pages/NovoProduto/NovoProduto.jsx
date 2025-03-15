@@ -10,6 +10,7 @@ import Container from '../../components/Container/Container'
 import Header from '../../components/Header/Header'
 import Titulo from '../../components/Titulo/Titulo'
 import BotaoVoltar from '../../components/BotaoVoltar/BotaoVoltar'
+import Modal from '../../components/Modal/Modal'
 
 // assets
 import imgCapa from '../../assets/material/add-image.png'
@@ -34,6 +35,10 @@ export default function NovoProduto() {
   // imagens
   const [imagemCapa, setImagemCapa] = useState(null);
   const [imagens, setImagens] = useState([]);
+
+  // states para modal
+  const [mensagem, setMensagem] = useState('');
+  const [tituloModal, setTituloModal] = useState('');
 
   // handle para upload de imagens
   const handleImagem = (event, tipoImg) => {
@@ -81,7 +86,9 @@ export default function NovoProduto() {
     await produtoRepository.anunciarProduto(obj);
 
     // confirmação para o usuário
-    alert('Produto anunciado com sucesso!');
+    setTituloModal('Sucesso!')
+    setMensagem('Produto anunciado na Sala Mágica!')
+    // alert('Produto anunciado com sucesso!');
     setFazendoUp(false);
     window.location.reload();
   }
@@ -237,6 +244,8 @@ export default function NovoProduto() {
 
 
         </Container>
+
+        {mensagem && <Modal mensagem={mensagem} setMensagem={setMensagem} tituloModal={tituloModal} />}
       </main>
     </>
   )
