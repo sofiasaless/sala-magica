@@ -18,6 +18,7 @@ import imgHome from '../../assets/material/img-home.png'
 // outros imports
 import ProdutosFs from '../../firebase/firestore/ProdutoFs';
 import { useEffect, useState } from 'react';
+import FormEncomenda from '../../components/FormEncomenda/FormEncomenda';
 
 export default function Home() {
 
@@ -38,7 +39,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    recuperarProdutos();
+    // recuperarProdutos();
   }, [])
 
   return (
@@ -126,6 +127,13 @@ export default function Home() {
           conteudoTXT={"Você imagina, nós criamos! Também oferecemos decorações personalizadas feitas do jeitinho que você quiser. Nós criamos cada detalhe com carinho para deixar o ambiente ainda mais acolhedor e divertido."}
         />
       </div>
+
+      <Container>
+        <Titulo titulo={"Encomendas personalizadas"} />
+
+        <FormEncomenda />
+
+      </Container>
 
       <Footer />
 
