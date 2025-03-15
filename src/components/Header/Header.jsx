@@ -5,13 +5,17 @@ import logo from '../../assets/material/logo1.png'
 import inicio from '../../assets/material/apps.png'
 import favorito from '../../assets/material/heart.png'
 import perfil from '../../assets/material/user.png'
+import notificacaoNone from '../../assets/material/notification-none.png'
+import notificacaoOn from '../../assets/material/notification-one.png'
+
+// imports
 import { Link } from 'react-router-dom'
 
 export default function Header() {
 
   return (
     <>
-      <nav className='navbar navbar-expand-lg align-items-center justify-content-center sticky-top'>
+      <nav className='navbar navbar-expand-lg align-items-center justify-content-center sticky-top shadow-sm'>
         <div id='header' className='container d-flex'>
           <div>
             <img className='logo' src={logo} />
@@ -31,6 +35,13 @@ export default function Header() {
               Perfil
             </Link>
           </div>
+
+          <div className='navbar-nav d-flex align-items-center gap-4'>
+            <Link to={'/notificacoes'} className="nav-link fonte-titulos">
+              <img src={notificacaoOn} className='me-2 mb-2 img-not' />
+            </Link>
+          </div>
+
         </div>
       </nav>
     </>

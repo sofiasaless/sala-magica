@@ -1,0 +1,14 @@
+.img-newNot {
+  height: 2.5rem;
+}
+
+.card-notificacao {
+  border: 3px solid var(--cinzaDois);
+  cursor: pointer;
+}
+
+.not-descri {
+  font-weight: 600;
+  color: var(--cinzaDois);
+  font-size: large;
+}

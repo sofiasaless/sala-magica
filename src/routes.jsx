@@ -15,6 +15,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import RotaProtegidaUser from "./pages/RotaProtegidaUser";
 import RotaProtegidaAdmin from "./pages/RotaProtegidaAdmin";
 import PerfilRedirecionamento from "./pages/PerfilRedirecionamento";
+import Notificacoes from "./pages/Notificacoes/Notificacoes";
+import DetalheNotificacao from "./pages/DetalheNotificacao/DetalheNotificacao";
 
 export default function Rotas() {
   return (
@@ -43,7 +45,7 @@ export default function Rotas() {
 
         <Route path="/perfil"
           element={
-            <PerfilRedirecionamento/>         
+            <PerfilRedirecionamento />
           }
         />
 
@@ -110,6 +112,22 @@ export default function Rotas() {
         <Route path="/cadastrar"
           element={
             <Cadastrar />
+          }
+        />
+
+        <Route path="/notificacoes"
+          element={
+            <RotaProtegidaUser>
+              <Notificacoes />
+            </RotaProtegidaUser>
+          }
+        />
+
+        <Route path="/detalhe-notificacao"
+          element={
+            <RotaProtegidaUser>
+              <DetalheNotificacao />
+            </RotaProtegidaUser>
           }
         />
 

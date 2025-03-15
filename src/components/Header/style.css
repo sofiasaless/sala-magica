@@ -3,9 +3,9 @@
     display: none;
   }
 
-  #header {
-    justify-content: center;
-  }
+  /* #header {
+    justify-content: space-around;
+  } */
 }
 
 nav {
@@ -35,4 +35,8 @@ img {
 
 #link:hover {
   border-bottom: 2px solid var(--verdeDois);
+}
+
+.img-not {
+  height: 2rem;
 }
