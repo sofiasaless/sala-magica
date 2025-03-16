@@ -268,7 +268,8 @@ export default function AuthService() {
     retornarInfosUsuario,
     atualizarPerfilUsuario,
     deletarUsuario,
-    recuperarUsuarios
+    recuperarUsuarios,
+    getReferenciaUsuario
   }
 
 }
