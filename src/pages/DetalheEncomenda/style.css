@@ -1,0 +1,11 @@
+.p-notificacao {
+  color: var(--cinzaUm);
+  font-size: large;
+  font-weight: 400;
+}
+
+.area-detalhe {
+  color: var(--cinzaUm);
+  font-weight: 600;
+  font-size: large;
+}

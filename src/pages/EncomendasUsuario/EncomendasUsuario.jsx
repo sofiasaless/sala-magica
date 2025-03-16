@@ -1,5 +1,3 @@
-import './style.css'
-
 // components
 import Container from '../../components/Container/Container'
 import Header from '../../components/Header/Header'
@@ -7,10 +5,9 @@ import Titulo from '../../components/Titulo/Titulo'
 import BotaoVoltar from '../../components/BotaoVoltar/BotaoVoltar'
 import CardNotificacao from '../../components/CardNotificacao/CardNotificacao'
 import NavSwitch from '../../components/NavSwitch/NavSwitch'
+import CardEncomenda from '../../components/CardEncomenda/CardEncomenda'
 
-// assets
-
-export default function Notificacoes() {
+export default function EncomendasUsuario() {
 
   return (
     <>
@@ -20,18 +17,18 @@ export default function Notificacoes() {
 
           <BotaoVoltar />
 
-          <Titulo titulo={'Suas notificações'} />
+          <Titulo titulo={'Minhas encomendas'} />
 
-          <NavSwitch opcaoUm={'Não lidas'} opcaoDois={'Lidas'}/>
+          <NavSwitch opcaoUm={'Encomendas pendentes'} opcaoDois={'Encomendas respondidas'}/>
 
           <section className='d-flex flex-column gap-3 justify-content-center'>
 
-            <CardNotificacao />
-            <CardNotificacao />
-            <CardNotificacao />
-            <CardNotificacao />
-            <CardNotificacao />
-
+            <CardEncomenda />
+            <CardEncomenda />
+            <CardEncomenda />
+            <CardEncomenda />
+            <CardEncomenda />
+            
           </section>
 
 

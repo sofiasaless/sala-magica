@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export default function CardNotificacao() {
   return (
-    <Link to={'/detalhe-notificacao'} className='nav-link card-notificacao d-flex rounded-2 p-4 align-items-center gap-2'>
+    <Link to={'/detalhe-notificacao'} className='nav-link card-notificacao d-flex rounded-2 p-3 align-items-center gap-2'>
       
       <div>
         <img src={imgNot} alt="" className='img-newNot' />

@@ -16,6 +16,10 @@ import RotaProtegidaUser from "./pages/RotaProtegidaUser";
 import RotaProtegidaAdmin from "./pages/RotaProtegidaAdmin";
 import PerfilRedirecionamento from "./pages/PerfilRedirecionamento";
 import Notificacoes from "./pages/Notificacoes/Notificacoes";
+import GerenciarEncomendas from "./pages/GerenciarEncomendas/GerenciarEncomendas";
+import EncomendasUsuario from "./pages/EncomendasUsuario/EncomendasUsuario";
+import DetalheMinhaEncomenda from "./pages/DetalheMinhaEncomenda/DetalheMinhaEncomenda";
+import DetalheEncomenda from "./pages/DetalheEncomenda/DetalheEncomenda";
 import DetalheNotificacao from "./pages/DetalheNotificacao/DetalheNotificacao";
 
 export default function Rotas() {
@@ -65,6 +69,22 @@ export default function Rotas() {
           }
         />
 
+        <Route path="/minhas-encomendas"
+          element={
+            <RotaProtegidaUser>
+              <EncomendasUsuario />
+            </RotaProtegidaUser>
+          }
+        />
+
+        <Route path="/detalhe-minha-encomenda"
+          element={
+            <RotaProtegidaUser>
+              <DetalheMinhaEncomenda />
+            </RotaProtegidaUser>
+          }
+        />
+
         <Route path="/novo-produto"
           element={
             <RotaProtegidaAdmin>
@@ -93,6 +113,22 @@ export default function Rotas() {
           element={
             <RotaProtegidaAdmin>
               <ListarUsuarios />
+            </RotaProtegidaAdmin>
+          }
+        />
+
+        <Route path="/gerenciamento-encomendas"
+          element={
+            <RotaProtegidaAdmin>
+              <GerenciarEncomendas />
+            </RotaProtegidaAdmin>
+          }
+        />
+
+        <Route path="/detalhe-encomenda"
+          element={
+            <RotaProtegidaAdmin>
+              <DetalheEncomenda />
             </RotaProtegidaAdmin>
           }
         />

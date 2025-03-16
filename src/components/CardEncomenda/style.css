@@ -5,11 +5,6 @@
 .card-notificacao {
   border: 3px solid var(--cinzaDois);
   cursor: pointer;
-  transition: all 0.5s ease;
-}
-
-.card-notificacao:hover {
-  transform: scale(1.05);
 }
 
 .not-descri {

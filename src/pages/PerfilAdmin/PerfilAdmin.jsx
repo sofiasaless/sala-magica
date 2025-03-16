@@ -12,6 +12,7 @@ import OpcaoAdmin from '../../components/OpcaoAdmin/OpcaoAdmin';
 import img1 from '../../assets/material/box-open.png'
 import img2 from '../../assets/material/boxes.png'
 import img3 from '../../assets/material/admin-alt.png'
+import img4 from '../../assets/material/order-history.png'
 import imgSair from '../../assets/material/inbox-out.png'
 
 // imports
@@ -111,6 +112,8 @@ export default function PerfilAdmin() {
           <OpcaoAdmin redirecionamento={'novo-produto'} imgOp={img1} descricao={'Anunciar novo produto no catálogo'} />
           <OpcaoAdmin redirecionamento={'editar-produtos'} imgOp={img2} descricao={'Editar/excluir produtos do catálogo'} />
           <OpcaoAdmin redirecionamento={'visualizar-usuarios'} imgOp={img3} descricao={'Visualizar usuários'} />
+          <OpcaoAdmin redirecionamento={'gerenciamento-encomendas'} imgOp={img4} descricao={'Gerenciamento de encomendas'} />
+
 
         </section>
 

@@ -7,13 +7,17 @@ import Titulo from "../../components/Titulo/Titulo";
 import MobileHeader from "../../components/MobileHeader/MobileHeader"
 import Perfil from "../../components/Perfil/Perfil";
 import Footer from "../../components/Footer/Footer";
+import Modal from '../../components/Modal/Modal';
+import OpcaoAdmin from '../../components/OpcaoAdmin/OpcaoAdmin';
 
 // assets
 import imgSair from '../../assets/material/inbox-out.png'
+import img4 from '../../assets/material/order-history.png'
+
+// imports
 import AuthService from '../../firebase/authentication/AuthService';
 import useAuth from '../../firebase/authentication/useAuth';
 import { useEffect, useState } from 'react';
-import Modal from '../../components/Modal/Modal';
 
 export default function PerfilRegular() {
 
@@ -125,6 +129,14 @@ export default function PerfilRegular() {
           </button>
         </div>
 
+        <Titulo titulo={'Opções de usuário'} />
+
+        <section className='mt-4 d-flex flex-column gap-2'>
+
+          <OpcaoAdmin redirecionamento={'minhas-encomendas'} imgOp={img4} descricao={'Minhas encomendas'} />
+
+        </section>
+
         <section className='mt-4 d-flex justify-content-end'>
           <div className='d-flex align-items-center area-sair' onClick={() => authServ.desconectarUsuario()}>
             <div className='me-3'>
@@ -167,7 +179,7 @@ export default function PerfilRegular() {
           </div>
         </div>
       </div>
-      
+
     </main>
   );
 }
