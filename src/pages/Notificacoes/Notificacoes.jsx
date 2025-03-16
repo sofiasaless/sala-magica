@@ -14,7 +14,7 @@ export default function Notificacoes() {
 
   return (
     <>
-      <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem', height: '100%' }}>
+      <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }} className='principal'>
         <Header />
         <Container>
 

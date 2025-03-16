@@ -16,4 +16,16 @@
   font-weight: 600;
   color: var(--cinzaDois);
   font-size: large;
+  flex: 1;
+}
+
+@media screen and (max-width: 500px) {
+  .card-notificacao {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .not-descri {
+    text-align: center;
+  }
 }

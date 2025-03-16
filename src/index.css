@@ -38,6 +38,8 @@
 main {
   background-image: url('/src/assets/background/scattered-forcefields.svg');
   background-repeat: space;
+  min-height: 100vh;
+  max-height: 100%;
 }
 
 @media screen and (max-width: 995px) {
