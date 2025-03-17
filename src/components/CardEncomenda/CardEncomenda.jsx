@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 export default function CardEncomenda( {titulo, encomenda, admin} ) {
 
   const objEncomenda = {
+    id: encomenda.id,
     categoria: encomenda.categoria,
     descricao: encomenda.descricao,
     altura: encomenda.altura,

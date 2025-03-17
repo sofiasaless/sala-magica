@@ -45,7 +45,7 @@ export default function DetalheMinhaEncomenda() {
                 <span className='desc-encomenda'>📌 <b>Medidas do produto:</b> Altura: {objEncomenda.altura}cm Comprimento: {objEncomenda.comprimento}cm</span>
                 <span className='desc-encomenda'>📌 <b>Referências: {objEncomenda.referencia}</b></span>
                 <span className='desc-encomenda'>📌 <b>Imagem de exemplo:</b></span>
-                <img src={objEncomenda.imagemExemplo} alt="" />
+                <img src={objEncomenda.imagemReferencia} alt="" />
               </div>
             </div>
 

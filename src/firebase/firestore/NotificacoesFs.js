@@ -25,7 +25,23 @@ export default function NotificacoesFs() {
     }
   }
 
+  async function adicionarNotificacaoResposta(notificacao, idSolicitante) {
+    try {
+
+      // necessário pegar todos os usuários para enviar notificação
+      const usuarioRef = doc(db, "usuarios", idSolicitante)
+
+      notificacao.notificados = [usuarioRef]
+
+      const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
+      console.log("notificacao criada com o id: ", docRef.id);
+    } catch (e) {
+      console.error("erro adicionando o documento: ", e);
+    }
+  }
+
   return {
     adicionarNotificacaoPadrao,
+    adicionarNotificacaoResposta
   }
 }
