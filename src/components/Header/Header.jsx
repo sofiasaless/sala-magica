@@ -10,8 +10,20 @@ import notificacaoOn from '../../assets/material/notification-one.png'
 
 // imports
 import { Link } from 'react-router-dom'
+import useAuth from '../../firebase/authentication/useAuth'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
+
+  const usuario = useAuth();
+  
+  const [logado, setLogado] = useState(false)
+
+  useEffect(() => {
+    if (usuario) {
+      setLogado(true)
+    }
+  }, [usuario])
 
   return (
     <>
@@ -36,7 +48,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className='navbar-nav d-flex align-items-center gap-4'>
+          <div style={{display: (logado)?'flex':'none'}} className='navbar-nav align-items-center gap-4'>
             <Link to={'/notificacoes'} className="nav-link fonte-titulos">
               <img src={notificacaoOn} className='me-2 mb-2 img-not' />
             </Link>

@@ -12,3 +12,8 @@
   color: var(--cinzaDois);
   font-size: large;
 }
+
+.data-encomenda {
+  font-size: medium;
+  color: var(--cinzaDois);
+}
