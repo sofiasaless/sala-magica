@@ -18,15 +18,18 @@ export default function EncomendasUsuario() {
 
   // states para encomendas
   const [encomendas, setEncomendas] = useState([])
+  const [pendentes, setPendentes] = useState(true)
+
+  const buscarEncomendas = async (status) => {
+    await encomendaRepositorio.reuperarEncomendasPorUsuario(usuario.email, status).then((resultado) => {
+      setEncomendas(resultado)
+    })
+    setPendentes(status)
+  }
 
   useEffect(() => {
-    const buscarEncomendas = async () => {
-      await encomendaRepositorio.reuperarEncomendasPorUsuario(usuario.email).then((resultado) => {
-        setEncomendas(resultado)
-      })
-    }
     if (usuario) {
-      buscarEncomendas()
+      buscarEncomendas(true)
     }
 
   }, [usuario])
@@ -41,7 +44,7 @@ export default function EncomendasUsuario() {
 
           <Titulo titulo={'Minhas encomendas'} />
 
-          <NavSwitch opcaoUm={'Encomendas pendentes'} opcaoDois={'Encomendas respondidas'}/>
+          <NavSwitch opcaoUm={'Encomendas pendentes'} opcaoDois={'Encomendas respondidas'} acaoUm={buscarEncomendas} acaoDois={buscarEncomendas}/>
 
           <section className='d-flex flex-column gap-3 justify-content-center'>
 
@@ -54,7 +57,7 @@ export default function EncomendasUsuario() {
               ))
               :
               <>
-                <h5 className='text-center'>Você ainda não fez nenhuma encomenda!</h5>
+                <h5 className='text-center'>{(pendentes)?'Você ainda não fez nenhuma encomenda!':'Nenhuma encomenda respondida!'}</h5>
               </>
             }
             

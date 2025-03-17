@@ -15,7 +15,7 @@ export default function EncomendaFs() {
     }
   }
 
-  async function reuperarEncomendasPorUsuario(email) {
+  async function reuperarEncomendasPorUsuario(email, status) {
     try {
       // referencia pro usuario
       const usuarioRepositorio = AuthService()
@@ -25,7 +25,8 @@ export default function EncomendaFs() {
       const encomendaRef = collection(db, "encomendas");
       const encomendaQuery = query(
         encomendaRef,
-        where("solicitante", "==", usuarioRef)
+        where("solicitante", "==", usuarioRef),
+        where("pendente", "==", status)
       );
 
       const encomendaSnapshot = await getDocs(encomendaQuery)
@@ -45,12 +46,12 @@ export default function EncomendaFs() {
     }
   }
 
-  async function recuperarEncomendasPendentes() {
+  async function recuperarEncomendasPorPendencia(status) {
     try {
       const encomendaRef = collection(db, "encomendas");
       const encomendaQuery = query(
         encomendaRef,
-        where("pendente", "==", true)
+        where("pendente", "==", status)
       );
 
       const encomendaSnapshot = await getDocs(encomendaQuery)
@@ -73,6 +74,6 @@ export default function EncomendaFs() {
   return {
     adicionarEncomenda,
     reuperarEncomendasPorUsuario,
-    recuperarEncomendasPendentes
+    recuperarEncomendasPorPendencia
   }
 }

@@ -17,16 +17,18 @@ export default function GerenciarEncomendas() {
 
   // states para encomendas
   const [encomendas, setEncomendas] = useState([])
+  const [pendentes, setPendentes] = useState(true)
+
+  const buscarEncomendas = async (status) => {
+    await encomendaRepositorio.recuperarEncomendasPorPendencia(status).then((resultado) => {
+      setEncomendas(resultado)
+    })
+    setPendentes(status)
+  }
 
   useEffect(() => {
-    const buscarEncomendas = async () => {
-      await encomendaRepositorio.recuperarEncomendasPendentes().then((resultado) => {
-        setEncomendas(resultado)
-      })
-    }
-
-    buscarEncomendas()
-  })
+    buscarEncomendas(true)
+  }, [])
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function GerenciarEncomendas() {
 
           <Titulo titulo={'Encomendas solicitadas'} admin={true} />
 
-          <NavSwitch opcaoUm={'Encomendas pendentes'} opcaoDois={'Encomendas respondidas'} />
+          <NavSwitch opcaoUm={'Encomendas pendentes'} opcaoDois={'Encomendas respondidas'} acaoUm={buscarEncomendas} acaoDois={buscarEncomendas} />
 
           <section className='d-flex flex-column gap-3 justify-content-center'>
 
@@ -51,7 +53,7 @@ export default function GerenciarEncomendas() {
                 ))
                 :
                 <>
-                  <h5 className='text-center'>Nenhuma encomenda pendente!</h5>
+                  <h5 className='text-center'>Nenhuma encomenda {(pendentes)?'pendente':'respondida'}!</h5>
                 </>
             }
 
