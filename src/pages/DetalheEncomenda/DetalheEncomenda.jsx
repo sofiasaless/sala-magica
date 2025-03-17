@@ -6,9 +6,31 @@ import Header from '../../components/Header/Header'
 import Titulo from '../../components/Titulo/Titulo'
 import BotaoVoltar from '../../components/BotaoVoltar/BotaoVoltar'
 
-// assets
+// imports
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import AuthService from '../../firebase/authentication/AuthService'
 
 export default function DetalheEncomenda() {
+
+  const location = useLocation();
+  const { objEncomenda } = location.state || {};
+
+  // states
+  const [usuarioSolicitante, setUsuarioSolicitante] = useState('')
+
+  useEffect(() => {
+    const buscarDadosDoSolicitante = async () => {
+      const authServ = AuthService()
+      await authServ.retornarInfosUsuarioViaId(objEncomenda.solicitante).then((resultado) => {
+        setUsuarioSolicitante(resultado)
+      })
+    }
+
+    if (objEncomenda) {
+      buscarDadosDoSolicitante()
+    }
+  }, [objEncomenda])
 
   return (
     <>
@@ -28,25 +50,26 @@ export default function DetalheEncomenda() {
             <div className='d-flex flex-column gap-4'>
               <div className='area-detalhe d-flex flex-column'>
                 <span className='text-uppercase '>- Informações do solicitante</span>
-                <span>Nome completo: Sofia Sales Lima</span>
-                <span>Telefone: (85) 98753-9972</span>
-                <span>E-mail: sofiasaleswk@gmail.com</span>
+                <span>Nome completo: {usuarioSolicitante.nomeCompleto}</span>
+                <span>Telefone: {usuarioSolicitante.telefone}</span>
+                <span>E-mail: {usuarioSolicitante.email}</span>
               </div>
 
               <div className='area-detalhe d-flex flex-column'>
-                <span className='text-uppercase '>- Detalhes encomenda</span>
+                <span className='text-uppercase'>- Detalhes encomenda</span>
                 <span>Encomenda feita em quinta-feira, 5 de março de 2025</span>
-                <span>📌 Categoria:</span>
-                <span>📌 Descrição:</span>
-                <span>📌 Medidas do produto:</span>
-                <span>📌 Referências:</span>
-                <span>📌 Imagem de exemplo:</span>
+                <span className='desc-encomenda'>📌 <b>Categoria:</b> {objEncomenda.categoria}</span>
+                <span className='desc-encomenda'>📌 <b>Descrição:</b> {objEncomenda.descricao}</span>
+                <span className='desc-encomenda'>📌 <b>Medidas do produto:</b> Altura: {objEncomenda.altura}cm Comprimento: {objEncomenda.comprimento}cm</span>
+                <span className='desc-encomenda'>📌 <b>Referências: {objEncomenda.referencia}</b></span>
+                <span className='desc-encomenda'>📌 <b>Imagem de exemplo</b></span>
+                <img src={objEncomenda.imagemExemplo} alt="" />
               </div>
             </div>
 
           </section>
 
-          <Titulo titulo={'Enviar resposta'} admin={true}/>
+          <Titulo titulo={'Enviar resposta'} admin={true} />
 
           <div className='area-infos mt-4'>
             <div className="p-0 mb-3 area-input">

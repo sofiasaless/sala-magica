@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, onAuthStateChanged, reauthenticateWithCredential, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth, database } from '../config'
-import { addDoc, collection, deleteDoc, doc, getDocs, query, runTransaction, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, runTransaction, updateDoc, where } from "firebase/firestore";
 
 export default function AuthService() {
 
@@ -179,6 +179,15 @@ export default function AuthService() {
 
   }
 
+  async function retornarInfosUsuarioViaId(id) {
+    try {
+      const result = await getDoc(doc(db, 'usuarios', id))
+      return result.data();
+    } catch (error) {
+      console.error("Erro ao recuperar as informações do usuario:", error);
+    }
+  }
+
   // para exclusão é necessária reautenticação
   async function reautenticarUsuario(email, senha) {
     try {
@@ -269,7 +278,8 @@ export default function AuthService() {
     atualizarPerfilUsuario,
     deletarUsuario,
     recuperarUsuarios,
-    getReferenciaUsuario
+    getReferenciaUsuario,
+    retornarInfosUsuarioViaId
   }
 
 }
