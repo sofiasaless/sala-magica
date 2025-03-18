@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import AuthService from '../../firebase/authentication/AuthService'
 import EncomendaFs from '../../firebase/firestore/EncomendaFs'
 import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
+import { NotificacaoObj } from '../../util/NotificacaoObj'
 
 export default function DetalheEncomenda() {
 
@@ -35,15 +36,13 @@ export default function DetalheEncomenda() {
       const notificacaoRepository = NotificacoesFs()
 
       // objeto de notificação de resposta
-      const objNotificacao = {
-        tituloNot: `Resposta a sua solicitação de encomenda. Venha conferir!`,
-        descricaoNot: resposta,
-        redirecionamento: ``,
-        tipo: 'RESPOSTA',
-        notificados: [],
-        notificados_lidos: [],
-        dataNotificacao: new Date()
-      }
+      const objNotificacao = NotificacaoObj(
+        `Resposta a sua solicitação de encomenda. Venha conferir!`,
+        resposta,
+        ``,
+        'RESPOSTA',
+        null
+      )
 
       // enviando a notificação
       await notificacaoRepository.adicionarNotificacaoResposta(objNotificacao, objEncomenda.solicitante)
@@ -85,7 +84,7 @@ export default function DetalheEncomenda() {
 
           <Titulo titulo={'Informações da encomenda'} admin={true} />
 
-          <section className='py-4 d-flex flex-column' style={{height: '100%'}}>
+          <section className='py-4 d-flex flex-column' style={{ height: '100%' }}>
 
             <h4>Nova encomenda solicitada por Cloroquina Gatuxa.</h4>
             <h5 style={{ color: 'var(--cinzaUm)' }} className='pb-3'>📝 Confira os detalhes do pedido e entre em contato para alinhar a produção.</h5>

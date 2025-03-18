@@ -16,6 +16,7 @@ import imgCapa from '../../assets/material/add-image.png'
 import UploadImagem from '../../cloudnary/upload'
 import ProdutosFs from '../../firebase/firestore/ProdutoFs'
 import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
+import { NotificacaoObj } from '../../util/NotificacaoObj'
 
 export default function NovoProduto() {
 
@@ -59,7 +60,7 @@ export default function NovoProduto() {
   const anunciar = async () => {
     try {
       setFazendoUp(true);
-  
+
       // objeto do produto que vai para o firestore
       const obj = {
         titulo: titulo,
@@ -73,34 +74,32 @@ export default function NovoProduto() {
         imagens: [],
         dataAnuncio: new Date(),
       };
-  
+
       // upload da imagem de capa
       if (imagemCapa) {
         obj.imagemCapa = await UploadImagem(imagemCapa);
       }
-  
+
       // upload das imagens adicionais
       const imagensUrl = await Promise.all(imagens.map((img) => UploadImagem(img)));
       obj.imagens = imagensUrl;
-  
+
       console.log('objeto final:', obj);
-  
+
       // enviando ao firestore
       let produtoLink = await produtoRepository.anunciarProduto(obj);
 
       // agora enviando a notificação de novo produto para todos usuários
-      const objNotificacao = {
-        tituloNot: `Novo produto no catálogo! Venha conferir o “${titulo}” da categoria ${categoria}!`,
-        descricaoNot: `✨ Temos um novo produto anunciado no catálogo da Sala Mágica! Explore a novidade e deixe sua sala de aula ainda mais especial.\nConfira agora e não esqueça de curtir se gostar! 💖\nAcesse aqui: `,
-        redirecionamento: `https://sala-magica.vercel.app/produto/${produtoLink}`,
-        tipo: 'PADRAO',
-        notificados: [],
-        notificados_lidos: [],
-        dataNotificacao: new Date()
-      }
+      const objNotificacao = NotificacaoObj(
+        `Novo produto no catálogo! Venha conferir o “${titulo}” da categoria ${categoria}!`,
+        `✨ Temos um novo produto anunciado no catálogo da Sala Mágica! Explore a novidade e deixe sua sala de aula ainda mais especial.\nConfira agora e não esqueça de curtir se gostar! 💖\nAcesse aqui: `,
+        `https://sala-magica.vercel.app/produto/${produtoLink}`,
+        'PADRAO',
+        null
+      )
 
       await notificacaoRepository.adicionarNotificacaoPadrao(objNotificacao)
-  
+
       // confirmação para o usuário
       setTituloModal('Sucesso!')
       setMensagem('Produto anunciado na Sala Mágica!')

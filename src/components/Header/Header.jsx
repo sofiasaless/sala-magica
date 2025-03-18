@@ -12,16 +12,25 @@ import notificacaoOn from '../../assets/material/notification-one.png'
 import { Link } from 'react-router-dom'
 import useAuth from '../../firebase/authentication/useAuth'
 import { useEffect, useState } from 'react'
+import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
 
 export default function Header() {
 
   const usuario = useAuth();
   
   const [logado, setLogado] = useState(false)
+  const [haNotificacoes, setHaNotificacoes] = useState(false)
+
+  const verificarNotificacoesNovas = async () => {
+    const notificacaoRepository = NotificacoesFs()
+    let resultado = await notificacaoRepository.verificarExistenciaNotificacao(usuario.email)
+    setHaNotificacoes(resultado.temNotificacao)
+  }
 
   useEffect(() => {
     if (usuario) {
       setLogado(true)
+      verificarNotificacoesNovas()
     }
   }, [usuario])
 
@@ -50,7 +59,7 @@ export default function Header() {
 
           <div style={{display: (logado)?'flex':'none'}} className='navbar-nav align-items-center gap-4'>
             <Link to={'/notificacoes'} className="nav-link fonte-titulos">
-              <img src={notificacaoOn} className='me-2 mb-2 img-not' />
+              <img src={(haNotificacoes)?notificacaoOn:notificacaoNone} className='me-2 mb-2 img-not' />
             </Link>
           </div>
 

@@ -8,18 +8,18 @@ export default function NotificacoesFs() {
 
   async function adicionarNotificacaoPadrao(notificacao) {
     try {
-
       // necessário pegar todos os usuários para enviar notificação
       const usuariosResult = await getDocs(collection(db, "usuarios"))
-      let usuariosRefs = []
-      usuariosResult.docs.map((doc) => {
-        usuariosRefs.push(doc.ref)
-      })
+      
+      // enviando a notificação pra todos os usuários
+      Promise.all(
+        usuariosResult.docs.map(async (doc) => {
+          notificacao.usuario_notificado = doc.ref
+          await addDoc(collection(db, "notificacoes"), notificacao);
+        })
+      )
 
-      notificacao.notificados = usuariosRefs
-
-      const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
-      console.log("notificacao criada com o id: ", docRef.id);
+      console.log("notificações criadas com sucesso");
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -31,7 +31,7 @@ export default function NotificacoesFs() {
       // necessário pegar todos os usuários para enviar notificação
       const usuarioRef = doc(db, "usuarios", idSolicitante)
 
-      notificacao.notificados = [usuarioRef]
+      notificacao.usuario_notificado = usuarioRef
 
       const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
       console.log("notificacao criada com o id: ", docRef.id);
@@ -42,7 +42,6 @@ export default function NotificacoesFs() {
 
   async function adicionarNotificacaoNovaEncomenda(notificacao) {
     try {
-
       // necessário pegar as referências dos usuários admin
       const usuariosRef = collection(db, "usuarios");
       const usuarioQuery = query(
@@ -51,25 +50,48 @@ export default function NotificacoesFs() {
       );
       const usuarioSnapshot = await getDocs(usuarioQuery);
 
-      let listaUsuariosRefs = []
-
-      usuarioSnapshot.docs.map((doc) => {
-        listaUsuariosRefs.push(doc.ref)
-      })
-
       // atribuindo os notificados ao objeto de notificação
-      notificacao.notificados = listaUsuariosRefs
+      Promise.all(
+        usuarioSnapshot.docs.map(async (doc) => {
+          notificacao.usuario_notificado = doc.ref
+          await addDoc(collection(db, "notificacoes"), notificacao);
+        })
+      )
 
-      const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
-      console.log("notificacao criada com o id: ", docRef.id);
+      console.log('notificações criadas com sucesso!')
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
+    }
+  }
+
+  // essa função deve retornar um booleano para contagem de notificações não lidas > 0 de um usuário
+  async function verificarExistenciaNotificacao(usuario_email) {
+    try {
+      const authServ = AuthService()
+      const usuarioRef = await authServ.getReferenciaUsuario(usuario_email)
+
+      // verificando se há notificações 
+      const notificacoesRef = collection(db, "notificacoes");
+      const notificacaoQuery = query(
+        notificacoesRef,
+        where("usuario_notificado", "==", usuarioRef),
+        where("lido", "==", false)
+      );
+      const notificacaoSnapshot = await getDocs(notificacaoQuery);
+
+      return {
+        temNotificacao: (notificacaoSnapshot.docs.length > 0),
+        usuarioReferencia: usuarioRef
+      }
+    } catch (error) {
+      console.log('ocorreu um erro ao verificar a existência de notificações pendentes ', error)
     }
   }
 
   return {
     adicionarNotificacaoPadrao,
     adicionarNotificacaoResposta,
-    adicionarNotificacaoNovaEncomenda
+    adicionarNotificacaoNovaEncomenda,
+    verificarExistenciaNotificacao
   }
 }
