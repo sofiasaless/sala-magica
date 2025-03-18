@@ -10,7 +10,7 @@ export default function NotificacoesFs() {
     try {
       // necessário pegar todos os usuários para enviar notificação
       const usuariosResult = await getDocs(collection(db, "usuarios"))
-      
+
       // enviando a notificação pra todos os usuários
       Promise.all(
         usuariosResult.docs.map(async (doc) => {
@@ -88,10 +88,54 @@ export default function NotificacoesFs() {
     }
   }
 
+  async function recuperandoNotificacoes(usuarioId, notLida) {
+    try {
+      const usuarioRef = doc(db, "usuarios", usuarioId)
+
+      // verificando se há notificações 
+      const notificacoesRef = collection(db, "notificacoes");
+      const notificacaoQuery = query(
+        notificacoesRef,
+        where("usuario_notificado", "==", usuarioRef),
+        where("lido", "==", notLida)
+      );
+      const notificacaoSnapshot = await getDocs(notificacaoQuery);
+
+      // listando as notificações e retornando
+      let listaNotificacoes = []
+      notificacaoSnapshot.docs.map((doc) => {
+        listaNotificacoes.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      })
+
+      return listaNotificacoes
+    } catch (error) {
+      console.log('erro ao recuperar as notificações do usuario ', error)
+    }
+  }
+
+  async function marcarNotificacaoComoLida(notificacaoId) {
+    try {
+      const notificacaoRef = doc(db, "notificacoes", notificacaoId)
+      await updateDoc(notificacaoRef,
+        {
+          lido: true
+        }
+      );
+      console.log('notificação marcada como lida')
+    } catch (error) {
+      console.log('ocorreu um erro ao marcar a notificação como lida ', error)
+    }
+  }
+
   return {
     adicionarNotificacaoPadrao,
     adicionarNotificacaoResposta,
     adicionarNotificacaoNovaEncomenda,
-    verificarExistenciaNotificacao
+    verificarExistenciaNotificacao,
+    recuperandoNotificacoes,
+    marcarNotificacaoComoLida
   }
 }

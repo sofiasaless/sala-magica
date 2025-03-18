@@ -19,12 +19,14 @@ export default function Header() {
   const usuario = useAuth();
   
   const [logado, setLogado] = useState(false)
-  const [haNotificacoes, setHaNotificacoes] = useState(false)
+  const [notificacoesResult, setNotificacoesResult] = useState(false)
+  const [usuarioId, setUsuarioId] = useState('')
 
   const verificarNotificacoesNovas = async () => {
     const notificacaoRepository = NotificacoesFs()
     let resultado = await notificacaoRepository.verificarExistenciaNotificacao(usuario.email)
-    setHaNotificacoes(resultado.temNotificacao)
+    setNotificacoesResult(resultado)
+    setUsuarioId(resultado.usuarioReferencia.id)
   }
 
   useEffect(() => {
@@ -58,8 +60,8 @@ export default function Header() {
           </div>
 
           <div style={{display: (logado)?'flex':'none'}} className='navbar-nav align-items-center gap-4'>
-            <Link to={'/notificacoes'} className="nav-link fonte-titulos">
-              <img src={(haNotificacoes)?notificacaoOn:notificacaoNone} className='me-2 mb-2 img-not' />
+            <Link to={'/notificacoes'} state={{usuarioId}} className="nav-link fonte-titulos">
+              <img src={(notificacoesResult.temNotificacao)?notificacaoOn:notificacaoNone} className='me-2 mb-2 img-not' />
             </Link>
           </div>
 
