@@ -68,7 +68,7 @@ export default function PerfilAdmin() {
   }, [usuario])
 
   return (
-    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
+    <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '8rem' }}>
       <Header />
       <div style={{ height: '100vh' }} className='container'>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />

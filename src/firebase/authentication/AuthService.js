@@ -32,7 +32,8 @@ export default function AuthService() {
 
         return {
           status: true,
-          mensagem: 'Cadastro efetuado com sucesso! Agora faça login para prosseguir.'
+          mensagem: 'Cadastro efetuado com sucesso! Agora faça login para prosseguir.',
+          usuarioRef: docRef
         }
         // ...
       })
@@ -213,11 +214,29 @@ export default function AuthService() {
       const curtidasQuery = query(curtidasRef, where("id_usuario", "==", usuarioRef));
       const curtidasSnapshot = await getDocs(curtidasQuery);
 
+      // necessario recuperar as encomendas do usuario para exclui-las do firestore
+      const encomendasRef = collection(db, "encomendas");
+      const encomendasQuery = query(encomendasRef, where("solicitante", "==", usuarioRef));
+      const encomendasSnapshot = await getDocs(encomendasQuery);
+
+      // necessario recuperar as notificações do usuario para exclui-las do firestore
+      const notificacoesRef = collection(db, "notificacoes");
+      const notificacoesQuery = query(notificacoesRef, where("usuario_notificado", "==", usuarioRef));
+      const notificacoesSnapshot = await getDocs(notificacoesQuery);
+
       // as exclusões vão acontecer em transação para caso a exclusão no authentication de errado
       await runTransaction(db, async (transaction) => {
 
         curtidasSnapshot.docs.forEach((curtidaDoc) => {
           transaction.delete(doc(db, "curtidas", curtidaDoc.id));
+        });
+
+        encomendasSnapshot.docs.forEach((encomendaDoc) => {
+          transaction.delete(doc(db, "encomendas", encomendaDoc.id));
+        });
+
+        notificacoesSnapshot.docs.forEach((notificacaoDoc) => {
+          transaction.delete(doc(db, "notificacoes", notificacaoDoc.id));
         });
 
         // antes de excluir do firestore, necessario excluir do authentication
