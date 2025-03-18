@@ -40,8 +40,36 @@ export default function NotificacoesFs() {
     }
   }
 
+  async function adicionarNotificacaoNovaEncomenda(notificacao) {
+    try {
+
+      // necessário pegar as referências dos usuários admin
+      const usuariosRef = collection(db, "usuarios");
+      const usuarioQuery = query(
+        usuariosRef,
+        where("role", "==", 'ADMIN')
+      );
+      const usuarioSnapshot = await getDocs(usuarioQuery);
+
+      let listaUsuariosRefs = []
+
+      usuarioSnapshot.docs.map((doc) => {
+        listaUsuariosRefs.push(doc.ref)
+      })
+
+      // atribuindo os notificados ao objeto de notificação
+      notificacao.notificados = listaUsuariosRefs
+
+      const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
+      console.log("notificacao criada com o id: ", docRef.id);
+    } catch (e) {
+      console.error("erro adicionando o documento: ", e);
+    }
+  }
+
   return {
     adicionarNotificacaoPadrao,
-    adicionarNotificacaoResposta
+    adicionarNotificacaoResposta,
+    adicionarNotificacaoNovaEncomenda
   }
 }

@@ -11,6 +11,7 @@ import AuthService from '../../firebase/authentication/AuthService';
 import EncomendaFs from '../../firebase/firestore/EncomendaFs';
 import UploadImagem from '../../cloudnary/upload';
 import Modal from '../Modal/Modal';
+import NotificacoesFs from '../../firebase/firestore/NotificacoesFs';
 
 export default function FormEncomenda() {
 
@@ -67,6 +68,23 @@ export default function FormEncomenda() {
       }
 
       await encomendaRepositorio.adicionarEncomenda(obj)
+
+      // infos do cliente para montar a notificação
+      let nomeCliente = await authServ.retornarInfosUsuarioViaId(refUsuario.id)
+
+      // enviando a notificação pro usuário admin
+      const objNotificacao = {
+        tituloNot: `Você tem uma novo pedido de encomenda personalizada!`,
+        descricaoNot: `O cliente ${nomeCliente.nomeCompleto} mandou um pedido de encomenda personalizada da categoria "${categoria}"! Vamos dar uma olhada? ✨\nAcesse aqui: `,
+        redirecionamento: `https://sala-magica.vercel.app/gerenciamento-encomendas`,
+        tipo: 'ENCOMENDA',
+        notificados: [],
+        notificados_lidos: [],
+        dataNotificacao: new Date()
+      }
+
+      const notificacaoRepository = NotificacoesFs()
+      await notificacaoRepository.adicionarNotificacaoNovaEncomenda(objNotificacao)
 
       setCarregando(false)
 
