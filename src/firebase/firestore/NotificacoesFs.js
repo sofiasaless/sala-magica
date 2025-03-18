@@ -40,6 +40,15 @@ export default function NotificacoesFs() {
     }
   }
 
+  async function adicionarNotificacaoIndividual(notificacao) {
+    try {
+      const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
+      console.log("notificacao individual criada com o id: ", docRef.id);
+    } catch (e) {
+      console.error("erro adicionando o documento: ", e);
+    }
+  }
+
   async function adicionarNotificacaoNovaEncomenda(notificacao) {
     try {
       // necessário pegar as referências dos usuários admin
@@ -132,6 +141,7 @@ export default function NotificacoesFs() {
 
   return {
     adicionarNotificacaoPadrao,
+    adicionarNotificacaoIndividual,
     adicionarNotificacaoResposta,
     adicionarNotificacaoNovaEncomenda,
     verificarExistenciaNotificacao,

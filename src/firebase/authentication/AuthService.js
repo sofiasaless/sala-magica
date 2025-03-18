@@ -32,7 +32,8 @@ export default function AuthService() {
 
         return {
           status: true,
-          mensagem: 'Cadastro efetuado com sucesso! Agora faça login para prosseguir.'
+          mensagem: 'Cadastro efetuado com sucesso! Agora faça login para prosseguir.',
+          usuarioRef: docRef
         }
         // ...
       })

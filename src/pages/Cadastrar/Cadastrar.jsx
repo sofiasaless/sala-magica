@@ -11,6 +11,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import AuthService from '../../firebase/authentication/AuthService'
 import { AuthErrorCodes } from 'firebase/auth'
+import { NotificacaoObj } from '../../util/NotificacaoObj'
+import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
 
 export default function Cadastrar() {
 
@@ -43,7 +45,7 @@ export default function Cadastrar() {
       senha: senha,
     }
 
-    await authServ.cadastrarNovoUsuário(obj).then((resultado) => {
+    await authServ.cadastrarNovoUsuário(obj).then(async (resultado) => {
       console.log(resultado)
       if (!(resultado.status)) {
         let msgModal = (resultado.erro === AuthErrorCodes.EMAIL_EXISTS) ? 'Usuário com e-mail já cadastrado no sistema! Tente novamente com outro e-mail.'
@@ -53,6 +55,19 @@ export default function Cadastrar() {
         setTitulo('Ops...')
         setCarregando(false)
       } else {
+
+        // mandando notificação de bem-vindo ao site
+        let objNotificacao = NotificacaoObj(
+          `Cadastro concluído com sucesso. Seja bem-vindo a Sala Mágica!`,
+          `✨ Olá, ${nomeCompleto.split(' ')[0]}. Seja bem-vindo ao site da Sala Mágica! Aqui você vai encontrar os melhores produtos para dar vida a sua sala de aula, esperamos que sua experiência seja completa, divirta-se e sinta-se a vontade para entrar em contato :)`,
+          ``,
+          'PADRAO',
+          resultado.usuarioRef
+        )
+
+        const noitificacaoRepositorio = NotificacoesFs()
+        await noitificacaoRepositorio.adicionarNotificacaoIndividual(objNotificacao)
+
         setMensagem(resultado.mensagem);
         setCarregando(false)
         setTitulo('Sucesso!')
