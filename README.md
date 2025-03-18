@@ -2,7 +2,7 @@
 
 A Sala Mágica é um projeto que desenvolvi com o objetivo de exercitar e consolidar meus conhecimentos em **React.js** e **Firebase**, sendo uma releitura completa do meu projeto [Landing Page](https://github.com/sofiasaless/landingPage).
 
-A plataforma funciona como uma loja online para anunciar e expor produtos de decoração destinados a salas de aula infantis e maternais, produzidos por uma única pessoa. Entre seus recursos, há a possibilidade de compartilhamento de produtos, navegação por categorias, pesquisa por título, sistema de cadastro e login de usuários, além das opções de curtir produtos, enviar pedidos de encomendas e receber notificações diversas ao estar logado na Sala Mágica.
+A plataforma funciona como uma loja online para anunciar e expor produtos de decoração destinados a salas de aula infantis e maternais, produzidos por uma única pessoa. Entre seus recursos, há a possibilidade de compartilhamento de produtos, navegação por categorias, pesquisa por título, sistema de cadastro e login de usuários, além da possibilidade de curtir produtos, solicitar encomendas personalizadas e receber notificações sobre novidades na plataforma.
 
 ## Recursos Principais
 
@@ -10,7 +10,7 @@ A plataforma funciona como uma loja online para anunciar e expor produtos de dec
 - **Sistema de Cadastro/Login** – Permite que usuários se registrem e façam login na Sala Mágica.
 - **Curtidas** – Usuários autenticados podem curtir produtos e visualizá-los na aba de favoritos.
 - **Sistema de encomendas personalizadas** – Usuários cadastrados e logados na Sala Mágica podem enviar pedidos de encomendas personalizadas.
-- **Notificações para usuários** – Recebimento de notificações de conclusão de cadastro, novos produtos anunciados no catálogo, respostas de pedidos de encomendas e muito mais.
+- **Sistema de Notificações** – Os usuários recebem alertas sobre novos produtos, atualizações de pedidos e conclusão de cadastro, mantendo-se sempre informados.
 - **Interface Responsiva** – Layout otimizado para diferentes dispositivos.
 
 ## Tecnologias
@@ -29,7 +29,7 @@ A Sala Mágica conta com dois tipos de usuários, diferenciados por **roles** (*
 - **USER** → Usuários comuns, possíveis clientes e visitantes da plataforma. Essas contas podem ser registradas diretamente na área de cadastro do site.
 - **ADMIN** → Responsável pela administração dos produtos e encomendas, podendo **adicionar, editar e excluir** itens do catálogo e responder os **pedidos de encomenda personalizadas**. As contas *ADMIN* são criadas manualmente no **Cloud Firestore** e no **Firebase Authentication**.
 
-Essa estrutura foi adotada para facilitar a manutenção do catálogo pela pessoa que solicitou a Sala Mágica.
+Essa estrutura foi adotada para facilitar a administração dos produtos e pedidos, garantindo um gerenciamento eficiente pelo fornecedor.
 
 ### Aqui estão algumas capturas de tela das funcionalidades disponíveis para o usuário *ADMIN*:
 
