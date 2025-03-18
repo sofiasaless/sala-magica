@@ -48,7 +48,7 @@ export default function GerenciarEncomendas() {
               (encomendas.length > 0) ?
                 encomendas.map((e) => (
                   <>
-                    <CardEncomenda encomenda={e} titulo={`Nova encomenda de categoria "${e.categoria}"`} admin={true} />
+                    <CardEncomenda key={e.id} encomenda={e} titulo={`Nova encomenda de categoria "${e.categoria}"`} admin={true} />
                   </>
                 ))
                 :

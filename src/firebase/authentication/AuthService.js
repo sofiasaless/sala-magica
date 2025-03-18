@@ -182,7 +182,7 @@ export default function AuthService() {
   async function retornarInfosUsuarioViaId(id) {
     try {
       const result = await getDoc(doc(db, 'usuarios', id))
-      return result.data();
+      return { id: result.id, ...result.data()};
     } catch (error) {
       console.error("Erro ao recuperar as informações do usuario:", error);
     }

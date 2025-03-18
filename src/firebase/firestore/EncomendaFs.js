@@ -71,9 +71,23 @@ export default function EncomendaFs() {
     }
   }
 
+  async function atualizarPendenciaEncomenda(id, status) {
+    try {
+      const encomendaRef = doc(db, "encomendas", id)
+      await updateDoc(encomendaRef,
+        {
+          pendente: status
+        }
+      );
+    } catch (error) {
+      console.log('ocorreu um erro ao tentar atualizar a encomenda ', error)
+    }
+  }
+
   return {
     adicionarEncomenda,
     reuperarEncomendasPorUsuario,
-    recuperarEncomendasPorPendencia
+    recuperarEncomendasPorPendencia,
+    atualizarPendenciaEncomenda
   }
 }

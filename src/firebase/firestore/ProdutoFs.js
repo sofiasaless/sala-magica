@@ -9,6 +9,7 @@ export default function ProdutosFs() {
     try {
       const docRef = await addDoc(collection(db, "produtos"), produto);
       console.log("documento criado com o id: ", docRef.id);
+      return docRef.id
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }

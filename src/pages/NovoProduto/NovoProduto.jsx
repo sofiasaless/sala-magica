@@ -1,9 +1,6 @@
 import './style.css'
 import { useState } from 'react'
 
-// outros imports
-import UploadImagem from '../../cloudnary/upload'
-import ProdutosFs from '../../firebase/firestore/ProdutoFs'
 
 // components
 import Container from '../../components/Container/Container'
@@ -15,10 +12,17 @@ import Modal from '../../components/Modal/Modal'
 // assets
 import imgCapa from '../../assets/material/add-image.png'
 
+// outros imports
+import UploadImagem from '../../cloudnary/upload'
+import ProdutosFs from '../../firebase/firestore/ProdutoFs'
+import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
+import { NotificacaoObj } from '../../util/NotificacaoObj'
+
 export default function NovoProduto() {
 
   // instância pro firestore
   const produtoRepository = ProdutosFs()
+  const notificacaoRepository = NotificacoesFs()
 
   // states para cadastro do produto
   const [titulo, setTitulo] = useState('')
@@ -54,43 +58,59 @@ export default function NovoProduto() {
 
   // processo de anunciar o produto
   const anunciar = async () => {
+    try {
+      setFazendoUp(true);
 
-    setFazendoUp(true);
+      // objeto do produto que vai para o firestore
+      const obj = {
+        titulo: titulo,
+        preco: preco,
+        descricao: descricao,
+        altura: altura,
+        comprimento: comprimento,
+        modelagem: modelagem,
+        categoria: categoria,
+        imagemCapa: '',
+        imagens: [],
+        dataAnuncio: new Date(),
+      };
 
-    // objeto do produto que vai para o firestore
-    const obj = {
-      titulo: titulo,
-      preco: preco,
-      descricao: descricao,
-      altura: altura,
-      comprimento: comprimento,
-      modelagem: modelagem,
-      categoria: categoria,
-      imagemCapa: '',
-      imagens: [],
-      dataAnuncio: new Date(),
-    };
+      // upload da imagem de capa
+      if (imagemCapa) {
+        obj.imagemCapa = await UploadImagem(imagemCapa);
+      }
 
-    // upload da imagem de capa
-    if (imagemCapa) {
-      obj.imagemCapa = await UploadImagem(imagemCapa);
+      // upload das imagens adicionais
+      const imagensUrl = await Promise.all(imagens.map((img) => UploadImagem(img)));
+      obj.imagens = imagensUrl;
+
+      console.log('objeto final:', obj);
+
+      // enviando ao firestore
+      let produtoLink = await produtoRepository.anunciarProduto(obj);
+
+      // agora enviando a notificação de novo produto para todos usuários
+      const objNotificacao = NotificacaoObj(
+        `Novo produto no catálogo! Venha conferir o “${titulo}” da categoria ${categoria}!`,
+        `✨ Temos um novo produto anunciado no catálogo da Sala Mágica! Explore a novidade e deixe sua sala de aula ainda mais especial.\nConfira agora e não esqueça de curtir se gostar! 💖\nAcesse aqui: `,
+        `https://sala-magica.vercel.app/produto/${produtoLink}`,
+        'PADRAO',
+        null
+      )
+
+      await notificacaoRepository.adicionarNotificacaoPadrao(objNotificacao)
+
+      // confirmação para o usuário
+      setTituloModal('Sucesso!')
+      setMensagem('Produto anunciado na Sala Mágica!')
+      // alert('Produto anunciado com sucesso!');
+      setFazendoUp(false);
+      // window.location.reload();
+    } catch (error) {
+      setTituloModal('Ops...')
+      setMensagem('Ocorreu um erro ao anunciar o produto na Sala Mágica!')
     }
 
-    // upload das imagens adicionais
-    const imagensUrl = await Promise.all(imagens.map((img) => UploadImagem(img)));
-    obj.imagens = imagensUrl;
-
-    console.log('objeto final:', obj);
-
-    // enviando ao firestore
-    await produtoRepository.anunciarProduto(obj);
-
-    // confirmação para o usuário
-    setTituloModal('Sucesso!')
-    setMensagem('Produto anunciado na Sala Mágica!')
-    // alert('Produto anunciado com sucesso!');
-    setFazendoUp(false);
-    window.location.reload();
   }
 
   return (

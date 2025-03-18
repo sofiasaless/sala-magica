@@ -6,9 +6,25 @@ import Header from '../../components/Header/Header'
 import Titulo from '../../components/Titulo/Titulo'
 import BotaoVoltar from '../../components/BotaoVoltar/BotaoVoltar'
 
-// assets
+// imports
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
 
 export default function DetalheNotificacao() {
+
+  // dados passados por rota
+  const location = useLocation()
+  const { notificacaoObj } = location.state || {};
+
+  const marcarComoLida = async () => {
+    const notificacaoRepositorio = NotificacoesFs()
+    await notificacaoRepositorio.marcarNotificacaoComoLida(notificacaoObj.id)
+  }
+
+  useEffect(() => {
+    marcarComoLida()
+  }, [])
 
   return (
     <>
@@ -18,23 +34,21 @@ export default function DetalheNotificacao() {
 
           <BotaoVoltar />
 
-          <Titulo titulo={'Lendo notificação id #i018u481'} />
+          <Titulo titulo={`Lendo notificação id #${notificacaoObj.id}`} />
 
           <section className='py-4 d-flex'>
 
-            <h4>Novo produto no catálogo! Venha conferir o “Calendário tema verde” da categoria enfeites de parede!</h4>
+            <h4>{notificacaoObj.tituloNot}</h4>
+
+            <p className='p-notificacao fst-italic'>
+              Notificação enviada em {notificacaoObj.dataNotificacao}
+            </p>
 
             <p className='p-notificacao'>
-              ✨ Temos um novo produto anunciado no catálogo da Sala Mágica! Explore a novidade e deixe sua sala de aula ainda mais especial.
+              {notificacaoObj.descricaoNot}
             </p>
 
-            <p className='p-notificacao'>
-              Confira agora e não esqueça de curtir se gostar! 💖
-            </p>
-                        
-            <p className='p-notificacao'>
-              Acesse aqui:
-            </p>
+            <a href={notificacaoObj.redirecionamento}>{notificacaoObj.redirecionamento}</a>
 
           </section>
 

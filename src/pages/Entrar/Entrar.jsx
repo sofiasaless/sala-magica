@@ -78,7 +78,7 @@ export default function Entrar() {
               <button type='submit' className='btn-form btn-um p-1 px-5 rounded-pill text-center' disabled={carregando}>
                 {
                   (carregando) ?
-                    <div className="spinner-border spinner-border-sm mx-5" role="status">
+                    <div className="spinner-border spinner-border-sm" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </div>
                     :
@@ -91,7 +91,7 @@ export default function Entrar() {
 
             <div className='d-flex flex-column'>
               <span className='text-center span-form'>Ainda não possui cadastro?</span>
-              <Link to={"/cadastrar"} className='btn-form btn-dois p-1 rounded-pill text-center'>Fazer cadastro</Link>
+              <Link type='button' to={"/cadastrar"} className='btn-form btn-dois p-1 rounded-pill text-center'>Fazer cadastro</Link>
             </div>
           </div>
         </form>
