@@ -3,6 +3,8 @@ import './style.css'
 // assets
 import imgIcon from '../../assets/material/circle-user.png'
 import imgExcl from '../../assets/material/trash-xmark.png'
+
+// imports
 import { useState } from 'react'
 
 export default function CardUsuario ({nome, telefone, email, role, dataCadastro}) {

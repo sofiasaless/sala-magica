@@ -19,7 +19,7 @@ export default function NotificacoesFs() {
         })
       )
 
-      console.log("notificações criadas com sucesso");
+      // console.log("notificações criadas com sucesso");
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -34,7 +34,7 @@ export default function NotificacoesFs() {
       notificacao.usuario_notificado = usuarioRef
 
       const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
-      console.log("notificacao criada com o id: ", docRef.id);
+      // console.log("notificacao criada com o id: ", docRef.id);
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -43,7 +43,7 @@ export default function NotificacoesFs() {
   async function adicionarNotificacaoIndividual(notificacao) {
     try {
       const docRef = await addDoc(collection(db, "notificacoes"), notificacao);
-      console.log("notificacao individual criada com o id: ", docRef.id);
+      // console.log("notificacao individual criada com o id: ", docRef.id);
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -67,7 +67,7 @@ export default function NotificacoesFs() {
         })
       )
 
-      console.log('notificações criadas com sucesso!')
+      // console.log('notificações criadas com sucesso!')
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -133,7 +133,7 @@ export default function NotificacoesFs() {
           lido: true
         }
       );
-      console.log('notificação marcada como lida')
+      // console.log('notificação marcada como lida')
     } catch (error) {
       console.log('ocorreu um erro ao marcar a notificação como lida ', error)
     }

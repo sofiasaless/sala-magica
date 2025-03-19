@@ -7,3 +7,11 @@
 .desc-encomenda {
   font-weight: 400;
 }
+
+.area-img-encomenda {
+  width: 100%;
+}
+
+.img-encomenda {
+  height: 25rem !important;
+}

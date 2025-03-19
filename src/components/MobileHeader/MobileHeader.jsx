@@ -4,6 +4,8 @@ import './style.css'
 import inicio from '../../assets/material/apps.png'
 import favorito from '../../assets/material/heart.png'
 import perfil from '../../assets/material/user.png'
+
+// imports
 import { Link } from 'react-router-dom'
 
 export default function MobileHeader() {

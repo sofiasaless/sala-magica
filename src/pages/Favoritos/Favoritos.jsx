@@ -35,34 +35,35 @@ export default function Favoritos() {
   }, [usuario])
 
   return (
-    <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
-      <Container>
-        <Titulo titulo={"Lista de desejos"} />
+    <>
+      <main style={{ backgroundColor: '#e8e8e8' }}>
+        <Header />
+        <Container>
+          <Titulo titulo={"Lista de desejos"} />
 
-        <section className='container py-5 gap-4 justify-content-center'>
+          <section className='container py-5 gap-4 justify-content-center'>
 
-          {
-            (produtosFavoritos.length != 0)
-              ?
-              produtosFavoritos.map((p) => (
-                <CardProdutoFavorito key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
-              ))
-              :
-              <div className="container" style={{height: '80vh'}}>
-                <div className="text-center">
-                  <h2>Você ainda favoritou nenhum produto! :(</h2>
+            {
+              (produtosFavoritos.length != 0)
+                ?
+                produtosFavoritos.map((p) => (
+                  <CardProdutoFavorito key={p.id} id={p.id} titulo={p.titulo} preco={p.preco} imagemCapa={p.imagemCapa} />
+                ))
+                :
+                <div className="container" style={{ height: '80vh' }}>
+                  <div className="text-center">
+                    <h2>Você ainda favoritou nenhum produto! :(</h2>
+                  </div>
                 </div>
-              </div>
-          }
+            }
 
-        </section>
+          </section>
 
-      </Container>
+        </Container>
 
+        <MobileHeader />
+      </main>
       <Footer />
-
-      <MobileHeader />
-    </main>
+    </>
   );
 }

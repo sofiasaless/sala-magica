@@ -4,13 +4,15 @@ import './style.css'
 import imgIlustrativa from '../../assets/material/delivery.png'
 import imgCapa from '../../assets/material/add-image.png'
 
+// componentes
+import Modal from '../Modal/Modal';
+
 // imports
 import { useEffect, useState } from 'react';
 import useAuth from '../../firebase/authentication/useAuth';
 import AuthService from '../../firebase/authentication/AuthService';
 import EncomendaFs from '../../firebase/firestore/EncomendaFs';
 import UploadImagem from '../../cloudnary/upload';
-import Modal from '../Modal/Modal';
 import NotificacoesFs from '../../firebase/firestore/NotificacoesFs';
 import { NotificacaoObj } from '../../util/NotificacaoObj';
 
@@ -91,7 +93,7 @@ export default function FormEncomenda() {
       setTitulo('Enviada com sucesso!')
       setMensagem('Seu pedido de encomenda personalizada foi enviado com sucesso! Assim que possível mandaremos uma resposta, fique atento a sua caixa de notificações para posteriores contatos.')
 
-      console.log(obj)
+      // console.log(obj)
     } catch (error) {
       setTitulo('Ops...')
       setMensagem('Ocorreu um erro interno! Não foi possível enviar o pedido de encomenda personalizada :(')

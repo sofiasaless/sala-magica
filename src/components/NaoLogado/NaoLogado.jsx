@@ -3,6 +3,8 @@ import imgError from '../../assets/material/paper-plane.png'
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MobileHeader from "../MobileHeader/MobileHeader";
+
+// imports
 import { useNavigate } from 'react-router-dom';
 
 export default function NaoLogado() {

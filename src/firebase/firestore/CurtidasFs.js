@@ -24,7 +24,7 @@ export default function CurtidasFs() {
         data_curtida: new Date()
       });
 
-      console.log("curtida registrada com sucesso!");
+      // console.log("curtida registrada com sucesso!");
     } catch (e) {
       console.error("Erro ao registrar curtida:", e);
     }
@@ -48,7 +48,7 @@ export default function CurtidasFs() {
       const curtidaId = curtidaSnapshot.docs[0].id;
       await deleteDoc(doc(db, "curtidas", curtidaId));
 
-      console.log("curtida removida com sucesso!");
+      // console.log("curtida removida com sucesso!");
     } catch (e) {
       console.error("erro ao apagar a curtida:", e);
     }

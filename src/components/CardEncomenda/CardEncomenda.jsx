@@ -14,9 +14,10 @@ export default function CardEncomenda( {titulo, encomenda, admin} ) {
     descricao: encomenda.descricao,
     altura: encomenda.altura,
     comprimento: encomenda.comprimento,
-    dataEncomenda: encomenda.dataEncomenda,
+    referencias: encomenda.referencias,
     imagemReferencia: encomenda.imagemReferencia,
-    solicitante: (encomenda.solicitante).id
+    solicitante: (encomenda.solicitante).id,
+    dataEncomenda: new Date(encomenda.dataEncomenda.seconds * 1000).toLocaleDateString('pt-BR', { dateStyle: 'full' })
   }
 
   const direcaoRota = (admin)?'detalhe-encomenda':'detalhe-minha-encomenda'
@@ -30,7 +31,7 @@ export default function CardEncomenda( {titulo, encomenda, admin} ) {
       
       <div className='ms-2 d-flex flex-column'>
         <span className='not-descri'>{titulo}</span>
-        <span className='data-encomenda'>Enviada em {new Date(encomenda.dataEncomenda.seconds * 1000).toLocaleDateString('pt-BR', { dateStyle: 'full' })}</span>
+        <span className='data-encomenda'>Enviada {new Date(encomenda.dataEncomenda.seconds * 1000).toLocaleDateString('pt-BR', { dateStyle: 'full' })}</span>
       </div>
 
     </Link>

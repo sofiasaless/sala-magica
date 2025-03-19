@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { database } from '../config'
 import AuthService from '../authentication/AuthService'
 
@@ -9,7 +9,7 @@ export default function EncomendaFs() {
   async function adicionarEncomenda(encomenda) {
     try {
       const docRef = await addDoc(collection(db, "encomendas"), encomenda);
-      console.log("encomenda criado com o id: ", docRef.id);
+      // console.log("encomenda criado com o id: ", docRef.id);
     } catch (e) {
       console.error("erro adicionando o documento: ", e);
     }
@@ -26,7 +26,8 @@ export default function EncomendaFs() {
       const encomendaQuery = query(
         encomendaRef,
         where("solicitante", "==", usuarioRef),
-        where("pendente", "==", status)
+        where("pendente", "==", status),
+        orderBy("dataEncomenda", "desc")
       );
 
       const encomendaSnapshot = await getDocs(encomendaQuery)
@@ -51,7 +52,8 @@ export default function EncomendaFs() {
       const encomendaRef = collection(db, "encomendas");
       const encomendaQuery = query(
         encomendaRef,
-        where("pendente", "==", status)
+        where("pendente", "==", status),
+        orderBy("dataEncomenda", "desc")
       );
 
       const encomendaSnapshot = await getDocs(encomendaQuery)
@@ -67,7 +69,7 @@ export default function EncomendaFs() {
 
       return listaEncomendas
     } catch (error) {
-      console.log('ocorreu um erro ao retornar as encomendas pendentes')
+      console.log('ocorreu um erro ao retornar as encomendas pendentes ', error)
     }
   }
 

@@ -36,12 +36,12 @@ export default function DetalheNotificacao() {
 
           <Titulo titulo={`Lendo notificação id #${notificacaoObj.id}`} />
 
-          <section className='py-4 d-flex'>
+          <section className='py-4 d-flex flex-column'>
 
             <h4>{notificacaoObj.tituloNot}</h4>
 
             <p className='p-notificacao fst-italic'>
-              Notificação enviada em {notificacaoObj.dataNotificacao}
+              Notificação enviada {notificacaoObj.dataNotificacao}
             </p>
 
             <p className='p-notificacao'>
