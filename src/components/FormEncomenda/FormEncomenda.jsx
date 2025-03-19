@@ -75,7 +75,7 @@ export default function FormEncomenda() {
 
       // enviando a notificação pro usuário admin
       const objNotificacao = NotificacaoObj(
-        `Você tem uma novo pedido de encomenda personalizada!`,
+        `Você tem um novo pedido de encomenda personalizada!`,
         `O cliente ${nomeCliente.nomeCompleto} mandou um pedido de encomenda personalizada da categoria "${categoria}"! Quer dar uma olhada? ✨\nAcesse aqui: `,
         `https://sala-magica.vercel.app/gerenciamento-encomendas`,
         'ENCOMENDA',
