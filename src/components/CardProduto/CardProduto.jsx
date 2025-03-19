@@ -57,7 +57,7 @@ export default function CardProduto( {id, titulo, preco, imagemCapa} ) {
   }
 
   useEffect(() => {
-    console.log('executando useeffect')
+    // console.log('executando useeffect')
     verificarCurtida();
   }, [usuario])
 

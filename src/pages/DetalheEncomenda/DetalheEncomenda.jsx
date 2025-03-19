@@ -99,13 +99,22 @@ export default function DetalheEncomenda() {
 
               <div className='area-detalhe d-flex flex-column'>
                 <span className='text-uppercase'>- Detalhes encomenda</span>
-                <span>Encomenda feita em quinta-feira, 5 de março de 2025</span>
+                <span>Encomenda feita {objEncomenda.dataEncomenda}</span>
                 <span className='desc-encomenda'>📌 <b>Categoria:</b> {objEncomenda.categoria}</span>
                 <span className='desc-encomenda'>📌 <b>Descrição:</b> {objEncomenda.descricao}</span>
-                <span className='desc-encomenda'>📌 <b>Medidas do produto:</b> Altura: {objEncomenda.altura}cm Comprimento: {objEncomenda.comprimento}cm</span>
+                
+                <div className='d-flex flex-column'>
+                  <span>📌 <b>Medidas do produto:</b></span>
+                  <span className='desc-encomenda'>- Altura: {objEncomenda.altura}cm</span>
+                  <span className='desc-encomenda'>- Comprimento: {objEncomenda.comprimento}cm</span>
+                </div>
+
                 <span className='desc-encomenda'>📌 <b>Referências: {objEncomenda.referencia}</b></span>
                 <span className='desc-encomenda'>📌 <b>Imagem de exemplo</b></span>
-                <img src={objEncomenda.imagemReferencia} style={{ height: '20%', width: '10%' }} alt="" />
+              </div>
+
+              <div className='area-img-encomenda d-flex justify-content-center'>
+                <img src={objEncomenda.imagemReferencia} className='img-encomenda' alt="" />
               </div>
             </div>
 

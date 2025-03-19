@@ -23,6 +23,7 @@ export default function EncomendasUsuario() {
   const buscarEncomendas = async (status) => {
     await encomendaRepositorio.reuperarEncomendasPorUsuario(usuario.email, status).then((resultado) => {
       setEncomendas(resultado)
+      console.log(resultado)
     })
     setPendentes(status)
   }
@@ -52,7 +53,7 @@ export default function EncomendasUsuario() {
               (encomendas.length > 0)?
               encomendas.map((e) => (
                 <>
-                  <CardEncomenda encomenda={e} titulo={`Encomenda de categoria "${e.categoria}"`} />
+                  <CardEncomenda key={e.id} encomenda={e} titulo={`Encomenda de categoria "${e.categoria}"`} />
                 </>
               ))
               :
