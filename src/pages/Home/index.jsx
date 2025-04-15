@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
 
       <div className='area-introducao d-flex pt-5 align-items-start'>
         <div className='d-flex justify-content-center align-items-center flex-column container'>

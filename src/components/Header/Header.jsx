@@ -11,10 +11,10 @@ import notificacaoOn from '../../assets/material/notification-one.png'
 // imports
 import { Link } from 'react-router-dom'
 import useAuth from '../../firebase/authentication/useAuth'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NotificacoesFs from '../../firebase/firestore/NotificacoesFs'
 
-export default function Header() {
+const Header = () => {
 
   const usuario = useAuth();
   
@@ -70,3 +70,5 @@ export default function Header() {
     </>
   )
 }
+
+export default React.memo(Header);

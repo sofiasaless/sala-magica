@@ -40,7 +40,7 @@ export default function Notificacoes() {
   return (
     <>
       <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }} className='principal'>
-        <Header />
+        {/* <Header /> */}
         <Container>
 
           <BotaoVoltar />

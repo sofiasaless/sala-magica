@@ -41,7 +41,7 @@ export default function RotaProtegidaAdmin({ children }) {
   if (!temPermissao) {
     return (
       <main style={{ backgroundColor: '#e8e8e8' }}>
-        <Header />
+        {/* <Header /> */}
         <section className="container d-flex justify-content-center align-items-center flex-column text-center" style={{ height: '90vh' }}>
           <h2 style={{ color: 'var(--vermelhoDois)' }}>Acesso negado</h2>
           <h3 style={{ color: 'var(--cinzaUm)' }}>Você não tem permissão para acessar esta página.</h3>

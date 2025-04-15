@@ -121,7 +121,7 @@ export default function DetalheProduto() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
 
       <div className='container-princiapl d-flex align-items-center justify-content-center flex-column'>
 

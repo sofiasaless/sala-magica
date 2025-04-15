@@ -26,7 +26,7 @@ export default function ListarUsuarios() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
       <div style={{ height: '100vh' }} className="container">
 
         <BotaoVoltar />

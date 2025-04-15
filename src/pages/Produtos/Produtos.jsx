@@ -73,7 +73,7 @@ export default function Produtos() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
       <Container>
         <Titulo titulo={categoria} upper={true} />
 

@@ -151,7 +151,7 @@ export default function EditarProduto() {
   return (
     <>
       <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
-        <Header />
+        {/* <Header /> */}
         <Container>
           <BotaoVoltar />
           <Titulo admin={true} titulo={'Informações do produto'} />

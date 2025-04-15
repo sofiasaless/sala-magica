@@ -116,7 +116,7 @@ export default function NovoProduto() {
   return (
     <>
       <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem' }}>
-        <Header />
+        {/* <Header /> */}
         <Container>
 
           <BotaoVoltar />

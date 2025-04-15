@@ -32,7 +32,7 @@ export default function ListarProdutosEditar() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
       <Container>
 
         <BotaoVoltar />

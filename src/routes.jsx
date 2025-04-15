@@ -21,152 +21,138 @@ import EncomendasUsuario from "./pages/EncomendasUsuario/EncomendasUsuario";
 import DetalheMinhaEncomenda from "./pages/DetalheMinhaEncomenda/DetalheMinhaEncomenda";
 import DetalheEncomenda from "./pages/DetalheEncomenda/DetalheEncomenda";
 import DetalheNotificacao from "./pages/DetalheNotificacao/DetalheNotificacao";
+import Layout from "./pages/Layouts/Layout";
+import LayoutProtectedUser from "./pages/Layouts/LayoutProtectedUser";
+import LayoutProtectedAdmin from "./pages/Layouts/LayoutProtectedAdmin";
 
 export default function Rotas() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/"
-          element={
-            <Home />
-          }
-        />
+        <Route element={<Layout />}>
+          <Route
+            path="/" element={
+              <Home />
+            }
+          />
 
-        <Route path="/favoritos"
-          element={
-            <RotaProtegidaUser>
+          <Route path="produtos"
+            element={
+              <Produtos />
+            }
+          />
+
+          <Route path="produto/:id"
+            element={
+              <DetalheProduto />
+            }
+          />
+
+        </Route>
+
+        {/* rotas para usuario logado */}
+        <Route element={<LayoutProtectedUser />}>
+          <Route path="perfil"
+            element={
+              <>
+                <PerfilRedirecionamento />
+              </>
+            }
+          />
+
+          <Route path="favoritos"
+            element={
               <Favoritos />
-            </RotaProtegidaUser>
-          }
-        />
+            }
+          />
 
-        <Route path="/produtos"
-          element={
-            <Produtos />
-          }
-        />
-
-        <Route path="/perfil"
-          element={
-            <PerfilRedirecionamento />
-          }
-        />
-
-        <Route path="/perfil/admin"
-          element={
-            <RotaProtegidaAdmin>
-              <PerfilAdmin />
-            </RotaProtegidaAdmin>
-          }
-        />
-
-        <Route path="/perfil/regular"
-          element={
-            <RotaProtegidaUser>
+          <Route path="perfil/regular"
+            element={
               <PerfilRegular />
-            </RotaProtegidaUser>
-          }
-        />
+            }
+          />
 
-        <Route path="/minhas-encomendas"
-          element={
-            <RotaProtegidaUser>
+          <Route path="minhas-encomendas"
+            element={
               <EncomendasUsuario />
-            </RotaProtegidaUser>
-          }
-        />
+            }
+          />
 
-        <Route path="/detalhe-minha-encomenda"
-          element={
-            <RotaProtegidaUser>
+          <Route path="detalhe-minha-encomenda"
+            element={
               <DetalheMinhaEncomenda />
-            </RotaProtegidaUser>
-          }
-        />
+            }
+          />
 
-        <Route path="/novo-produto"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="notificacoes"
+            element={
+              <Notificacoes />
+            }
+          />
+
+          <Route path="detalhe-notificacao"
+            element={
+              <DetalheNotificacao />
+            }
+          />
+        </Route>
+
+        {/* rotas para usuario logado que é admin */}
+        <Route element={<LayoutProtectedAdmin />}>
+          <Route path="perfil/admin"
+            element={
+              <PerfilAdmin />
+            }
+          />
+
+          <Route path="novo-produto"
+            element={
               <NovoProduto />
-            </RotaProtegidaAdmin>
-          }
-        />
+            }
+          />
 
-        <Route path="/editar-produtos"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="editar-produtos"
+            element={
               <ListarProdutosEditar />
-            </RotaProtegidaAdmin>
-          }
-        />
+            }
+          />
 
-        <Route path="/editar-produto/:id"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="editar-produto/:id"
+            element={
               <EditarProduto />
-            </RotaProtegidaAdmin>
-          }
-        />
+            }
+          />
 
-        <Route path="/visualizar-usuarios"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="visualizar-usuarios"
+            element={
               <ListarUsuarios />
-            </RotaProtegidaAdmin>
-          }
-        />
+            }
+          />
 
-        <Route path="/gerenciamento-encomendas"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="gerenciamento-encomendas"
+            element={
               <GerenciarEncomendas />
-            </RotaProtegidaAdmin>
-          }
-        />
+            }
+          />
 
-        <Route path="/detalhe-encomenda"
-          element={
-            <RotaProtegidaAdmin>
+          <Route path="detalhe-encomenda"
+            element={
               <DetalheEncomenda />
-            </RotaProtegidaAdmin>
-          }
-        />
-
-        <Route path="/produto/:id"
-          element={
-            <DetalheProduto />
-          }
-        />
-
-        <Route path="/entrar"
+            }
+          />
+        </Route>
+        <Route path="entrar"
           element={
             <Entrar />
           }
         />
 
-        <Route path="/cadastrar"
+        <Route path="cadastrar"
           element={
             <Cadastrar />
           }
         />
-
-        <Route path="/notificacoes"
-          element={
-            <RotaProtegidaUser>
-              <Notificacoes />
-            </RotaProtegidaUser>
-          }
-        />
-
-        <Route path="/detalhe-notificacao"
-          element={
-            <RotaProtegidaUser>
-              <DetalheNotificacao />
-            </RotaProtegidaUser>
-          }
-        />
-
       </Routes>
     </BrowserRouter>
   );

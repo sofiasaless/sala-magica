@@ -29,7 +29,7 @@ export default function DetalheNotificacao() {
   return (
     <>
       <main style={{ backgroundColor: '#e8e8e8', paddingBottom: '5rem', height: '100%' }}>
-        <Header />
+        {/* <Header /> */}
         <Container>
 
           <BotaoVoltar />

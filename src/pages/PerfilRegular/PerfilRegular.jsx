@@ -93,7 +93,7 @@ export default function PerfilRegular() {
 
   return (
     <main style={{ backgroundColor: '#e8e8e8' }}>
-      <Header />
+      {/* <Header /> */}
       <section className='container d-flex flex-column' style={{ height: '90vh' }}>
         <Titulo titulo={"Bem-vindo ao seu perfil"} />
 

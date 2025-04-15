@@ -37,7 +37,7 @@ export default function Favoritos() {
   return (
     <>
       <main style={{ backgroundColor: '#e8e8e8' }}>
-        <Header />
+        {/* <Header /> */}
         <Container>
           <Titulo titulo={"Lista de desejos"} />
 
